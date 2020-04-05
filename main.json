@@ -1,0 +1,298 @@
+{
+    "type": "APL",
+    "version": "1.3",
+    "settings": {},
+    "theme": "light",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "Stock color for the light theme",
+            "colors": {
+                "colorTextPrimary": "#ffffff"
+            }
+        },
+        {
+            "description": "Stock color for the dark theme",
+            "when": "${viewport.theme == 'dark'}",
+            "colors": {
+                "colorTextPrimary": "#ffffff"
+            }
+        },
+        {
+            "description": "Standard font sizes",
+            "dimensions": {
+                "textSizeBody": 48,
+                "textSizePrimary": 20,
+                "textSizeSecondary": 15,
+                "textSizeTertiary": 18,
+                "textSizeDetails": 20,
+                "textSizeSecondaryHint": 25
+            }
+        },
+        {
+            "description": "Common margins and padding",
+            "dimensions": {
+                "marginTop": 40,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginBottom": 40
+            }
+        }
+    ],
+    "styles": {
+        "textStylePrimary": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "400",
+                "fontSize": "@textSizePrimary"
+            }
+        },
+        "subTitlePrimary": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "300",
+                "fontSize": "@textSizeSecondary"
+            }
+        },
+        "smallTitle": {
+            "values": {
+                "color": "white",
+                "fontFamily": "helvetica",
+                "fontWeight": "300",
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "fontSize": "@textSizeTertiary"
+            }
+        }
+    },
+    "onMount": [],
+    "graphics": {},
+    "commands": {},
+    "layouts": {
+        "backgroundLayout": {
+            "description": "Page background",
+            "parameters": [
+                "bgImg"
+            ],
+            "items": [
+                {
+                    "type": "Image",
+                    "opacity": 1,
+                    "width": "100vw",
+                    "height": "100vh",
+                    "source": "${bgImg}",
+                    "scale": "best-fill",
+                    "position": "absolute"
+                }
+            ]
+        },
+        "logoLayout": {
+            "description": "Main logo for the page",
+            "parameters": [
+                "logoUrl"
+            ],
+            "items": [
+                {
+                    "type": "Image",
+                    "opacity": 1,
+                    "width": "100%",
+                    "height": "100%",
+                    "source": "${logoUrl}",
+                    "scale": "best-fit"
+                }
+            ]
+        },
+        "BtnLayout": {
+            "description": "Btn Layout",
+            "parameters": [
+                "url"
+            ],
+            "items": [
+                {
+                    "type": "Image",
+                    "opacity": 1,
+                    "width": "100%",
+                    "height": "100%",
+                    "source": "${url}",
+                    "scale": "best-fit"
+                }
+            ]
+        },
+        "titleTextLayout": {
+            "description": "Title Text",
+            "parameters": [
+                "titleText"
+            ],
+            "items": [
+                {
+                    "type": "Text",
+                    "fontFamily": "helvetica",
+                    "width": "100%",
+                    "textAlign": "left",
+                    "style": "textStylePrimary",
+                    "text": "${titleText}",
+                    "maxLines": 2
+                }
+            ]
+        },
+        "subTitleTextLayout": {
+            "description": "Sub-Title Text",
+            "parameters": [
+                "subTitleText"
+            ],
+            "items": [
+                {
+                    "type": "Text",
+                    "fontFamily": "helvetica",
+                    "width": "100%",
+                    "textAlign": "left",
+                    "style": "subTitlePrimary",
+                    "text": "${subTitleText}",
+                    "maxLines": 3
+                }
+            ]
+        },
+        "mainLayout": {
+            "parameters": [
+                "pBackgroundImage",
+                "pLogoImage",
+                "pTitleText",
+                "pSubTitleText",
+                "pWatchNowBtn"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "height": "100vh",
+                    "width": "100vw",
+                    "items": [
+                        {
+                            "type": "backgroundLayout",
+                            "bgImg": "${pBackgroundImage}"
+                        },
+                        {
+                            "type": "Container",
+                            "description": "Logo Container",
+                            "position": "absolute",
+                            "width": "20vw",
+                            "height": "30vh",
+                            "top": "3vh",
+                            "left": "2vw",
+                            "direction": "row",
+                            "items": [
+                                {
+                                    "type": "logoLayout",
+                                    "logoUrl": "${pLogoImage}"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Container",
+                            "description": "Title Text Container",
+                            "position": "absolute",
+                            "width": "50vw",
+                            "height": "40vh",
+                            "top": "30vh",
+                            "left": "5vw",
+                            "direction": "column",
+                            "items": [
+                                {
+                                    "type": "titleTextLayout",
+                                    "titleText": "${pTitleText}"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Container",
+                            "description": "Sub Title Text Container",
+                            "position": "absolute",
+                            "width": "45vw",
+                            "height": "15vh",
+                            "top": "37vh",
+                            "left": "5vw",
+                            "direction": "column",
+                            "items": [
+                                {
+                                    "type": "subTitleTextLayout",
+                                    "subTitleText": "${pSubTitleText}"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Container",
+                            "description": "Watch Now Container",
+                            "position": "absolute",
+                            "width": "14vw",
+                            "height": "8vh",
+                            "top": "50vh",
+                            "left": "4.9vw",
+                            "direction": "row",
+                            "items": [
+                                {
+                                    "type": "Frame",
+                                    "width": "100%",
+                                    "height": "100%",
+                                    "backgroundColor": "none",
+                                    "borderColor": "white",
+                                    "borderWidth": 2,
+                                    "borderRadius": "25",
+                                    "position": "absolute",
+                                    "item": {
+                                        "type": "Text",
+                                        "style": "smallTitle",
+                                        "width": "100%",
+                                        "height": "100%",
+                                        "textAlignVertical": "auto",
+                                        "text": "WATCH NOW",
+                                        "lineHeight": 2.2
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Container",
+                            "description": "Cards Bg Container",
+                            "position": "absolute",
+                            "width": "100vw",
+                            "height": "35vh",
+                            "top": "65vh",
+                            "left": "10vw",
+                            "direction": "row",
+                            "items": [
+                                {
+                                    "type": "Frame",
+                                    "borderBottomLeftRadius": 0,
+                                    "borderTopLeftRadius": 15,
+                                    "width": "100%",
+                                    "height": "100%",
+                                    "backgroundColor": "white",
+                                    "opacity": 0.4
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "type": "mainLayout",
+                "pBackgroundImage": "${payload.listData.properties.config.backgroundImage}",
+                "pLogoImage": "${payload.listData.properties.config.logoImage}",
+                "pTitleText": "${payload.listData.properties.config.titleText}",
+                "pSubTitleText": "${payload.listData.properties.config.subTitleText}",
+                "pWatchNowBtn": "${payload.listData.properties.config.watchNowBtn}"
+            }
+        ]
+    }
+}

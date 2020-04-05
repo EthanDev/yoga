@@ -1,0 +1,14 @@
+{
+    "listData": {
+        "type": "object",
+        "properties": {
+            "config": {
+                "backgroundImage": "https://res.cloudinary.com/snapitdirect/image/upload/v1585949098/APL/bg.png",
+                "logoImage": "https://res.cloudinary.com/snapitdirect/image/upload/v1585944136/APL/Yoga.png",
+                "titleText": "Yoga in the comfort of your home",
+                "subTitleText": "Expand, your mind, nuture your body, and elevate your soul with my handpicked collection of mediations, yoga practices and lifestyle videos.",
+                "watchNowBtn": "https://res.cloudinary.com/snapitdirect/image/upload/v1585949903/APL/Watch_Now.png"
+            }
+        }
+    }
+}
