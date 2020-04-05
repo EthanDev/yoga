@@ -10,5 +10,57 @@
                 "watchNowBtn": "https://res.cloudinary.com/snapitdirect/image/upload/v1585949903/APL/Watch_Now.png"
             }
         }
-    }
+    },
+    "imageListData": {
+        "headerTitle": "",
+        "headerSubtitle": "",
+        "headerAttributionImage": "",
+        "backgroundImageSource": "",
+        "defaultImageSource": "",
+        "hintText": "",
+        "listItemsToShow": [
+            {
+                "primaryText": "First list item",
+                "secondaryText": "Secondary text",
+                "imageSource": "https://d2o906d8ln7ui1.cloudfront.net/images/md_gruyere.png",
+                "imageProgressBarPercentage": 90,
+                "imageShowProgressBar": false
+            }
+        ]
+    },
+    "listItems": [
+        {
+            "picture": {
+                "type": "uri",
+                "value": "https://source.unsplash.com/random"
+            },
+            "humanLabel": {
+                "xml:lang": "en",
+                "type": "literal",
+                "value": "Suits"
+            }
+        },
+        {
+            "picture": {
+                "type": "uri",
+                "value": "https://source.unsplash.com/random"
+            },
+            "humanLabel": {
+                "xml:lang": "en",
+                "type": "literal",
+                "value": "Suits"
+            }
+        },
+        {
+            "picture": {
+                "type": "uri",
+                "value": "https://source.unsplash.com/random"
+            },
+            "humanLabel": {
+                "xml:lang": "en",
+                "type": "literal",
+                "value": "Suits"
+            }
+        }
+    ]
 }

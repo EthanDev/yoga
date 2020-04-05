@@ -42,6 +42,15 @@
                 "marginRight": 10,
                 "marginBottom": 40
             }
+        },
+        {
+            "description": "Common margins and padding",
+            "dimensions": {
+                "marginTop": 40,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginBottom": 40
+            }
         }
     ],
     "styles": {
@@ -74,6 +83,49 @@
     "graphics": {},
     "commands": {},
     "layouts": {
+        "HorizontalListItem": {
+            "item": [
+                {
+                    "type": "TouchWrapper",
+                    "id": "touch-${ordinal}",
+                    "item": [
+                        {
+                            "type": "Container",
+                            "paddingLeft": 16,
+                            "paddingRight": 16,
+                            "height": "100%",
+                            "width": "40%",
+                            "inheritParentState": true,
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "source": "${data.picture.value}",
+                                    "height": "50vh",
+                                    "width": "50vw",
+                                    "scale": "best-fill",
+                                    "align": "center",
+                                    "opacity": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "onPress": [
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "${data}"
+                            ]
+                        },
+                        {
+                            "type": "SetState",
+                            "componentId": "mycontainer",
+                            "state": "disabled",
+                            "value": true
+                        }
+                    ]
+                }
+            ]
+        },
         "backgroundLayout": {
             "description": "Page background",
             "parameters": [
@@ -177,7 +229,9 @@
                 "pLogoImage",
                 "pTitleText",
                 "pSubTitleText",
-                "pWatchNowBtn"
+                "pWatchNowBtn",
+                "imageListData",
+                "list"
             ],
             "items": [
                 {
@@ -256,15 +310,17 @@
                                     "borderWidth": 2,
                                     "borderRadius": "25",
                                     "position": "absolute",
-                                    "item": {
-                                        "type": "Text",
-                                        "style": "smallTitle",
-                                        "width": "100%",
-                                        "height": "100%",
-                                        "textAlignVertical": "auto",
-                                        "text": " ▶   WATCH NOW",
-                                        "lineHeight": 2.2
-                                    }
+                                    "item": [
+                                        {
+                                            "type": "Text",
+                                            "style": "smallTitle",
+                                            "width": "100%",
+                                            "height": "100%",
+                                            "textAlignVertical": "auto",
+                                            "text": " ▶   WATCH NOW",
+                                            "lineHeight": 2.2
+                                        }
+                                    ]
                                 }
                             ]
                         },
@@ -280,12 +336,46 @@
                             "items": [
                                 {
                                     "type": "Frame",
-                                    "borderBottomLeftRadius": 0,
-                                    "borderTopLeftRadius": 15,
                                     "width": "100%",
                                     "height": "100%",
                                     "backgroundColor": "white",
+                                    "borderTopLeftRadius": 15,
                                     "opacity": 0.4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Container",
+                            "position": "absolute",
+                            "left": "10vw",
+                            "top": "65vh",
+                            "description": " Videos 1",
+                            "width": "100vw",
+                            "height": "35vh",
+                            "paddingTop": "10",
+                            "direction": "row",
+                            "items": [
+                                {
+                                    "type": "Sequence",
+                                    "width": "75vw",
+                                    "height": "30vh",
+                                    "paddingLeft": "@marginLeft",
+                                    "paddingRight": "@marginRight",
+                                    "data": "${list}",
+                                    "numbered": true,
+                                    "scrollDirection": "horizontal",
+                                    "item": [
+                                        {
+                                            "type": "Image",
+                                            "source": "${data.picture.value}",
+                                            "height": "100%",
+                                            "width": "20%",
+                                            "scale": "best-fill",
+                                            "align": "center",
+                                            "opacity": 1,
+                                            "spacing": "2vw"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -305,7 +395,8 @@
                 "pLogoImage": "${payload.listData.properties.config.logoImage}",
                 "pTitleText": "${payload.listData.properties.config.titleText}",
                 "pSubTitleText": "${payload.listData.properties.config.subTitleText}",
-                "pWatchNowBtn": "${payload.listData.properties.config.watchNowBtn}"
+                "pWatchNowBtn": "${payload.listData.properties.config.watchNowBtn}",
+                "list": "${payload.listItems}"
             }
         ]
     }
