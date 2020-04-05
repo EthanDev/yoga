@@ -61,7 +61,7 @@
         },
         "smallTitle": {
             "values": {
-                "color": "white",
+                "color": "#EDE1CB",
                 "fontFamily": "helvetica",
                 "fontWeight": "300",
                 "textAlign": "center",
@@ -241,7 +241,7 @@
                             "type": "Container",
                             "description": "Watch Now Container",
                             "position": "absolute",
-                            "width": "14vw",
+                            "width": "17vw",
                             "height": "8vh",
                             "top": "50vh",
                             "left": "4.9vw",
@@ -251,7 +251,7 @@
                                     "type": "Frame",
                                     "width": "100%",
                                     "height": "100%",
-                                    "backgroundColor": "none",
+                                    "backgroundColor": "#202F58",
                                     "borderColor": "white",
                                     "borderWidth": 2,
                                     "borderRadius": "25",
@@ -262,7 +262,7 @@
                                         "width": "100%",
                                         "height": "100%",
                                         "textAlignVertical": "auto",
-                                        "text": "WATCH NOW",
+                                        "text": " ▶   WATCH NOW",
                                         "lineHeight": 2.2
                                     }
                                 }
@@ -285,10 +285,7 @@
                                     "width": "100%",
                                     "height": "100%",
                                     "backgroundColor": "white",
-                                    "opacity": 0.4,
-                                    "item":{
-                                        
-                                    }
+                                    "opacity": 0.4
                                 }
                             ]
                         }
