@@ -1,8 +1,7 @@
 {
-    "listData": {
+    "currentView": {
         "type": "object",
         "properties": {
-            "config": {
                 "backgroundImage1": "https://source.unsplash.com/1920x1080/?yoga",
                 "backgroundImage": "https://res.cloudinary.com/snapitdirect/image/upload/v1586071803/APL/bg1.png",
                 "logoImage": "https://res.cloudinary.com/snapitdirect/image/upload/v1585944136/APL/Yoga.png",
@@ -10,92 +9,74 @@
                 "subTitleText": "Expand, your mind, nuture your body, and elevate your soul with my handpicked collection of mediations, yoga practices and lifestyle videos.",
                 "watchNowBtn": "https://res.cloudinary.com/snapitdirect/image/upload/v1585949903/APL/Watch_Now.png",
                 "transparentBtmBg": "https://res.cloudinary.com/snapitdirect/image/upload/v1586163992/APL/blank.png"
-            }
-        }
-    },
-    "imageListData": {
-        "headerTitle": "",
-        "headerSubtitle": "",
-        "headerAttributionImage": "",
-        "backgroundImageSource": "",
-        "defaultImageSource": "",
-        "hintText": "",
-        "listItemsToShow": [
+        },
+        "videoCards": [
             {
-                "primaryText": "First list item",
-                "secondaryText": "Secondary text",
-                "imageSource": "https://d2o906d8ln7ui1.cloudfront.net/images/md_gruyere.png",
-                "imageProgressBarPercentage": 90,
-                "imageShowProgressBar": false
+                "picture": {
+                    "type": "uri",
+                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162732/APL/video_cards/60360150_10155935158957504_6009695742971609088_o.jpg"
+                },
+                "humanLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Posture"
+                }
+            },
+            {
+                "picture": {
+                    "type": "uri",
+                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162732/APL/video_cards/60101225_10155935158992504_7912407113123495936_o.jpg"
+                },
+                "humanLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Strecthes"
+                }
+            },
+            {
+                "picture": {
+                    "type": "uri",
+                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162732/APL/video_cards/60546674_10155935159027504_4623598853252186112_o.jpg"
+                },
+                "humanLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Grounding"
+                }
+            },
+            {
+                "picture": {
+                    "type": "uri",
+                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162733/APL/video_cards/89666966_10156637094182504_4603664784750018560_n.jpg"
+                },
+                "humanLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Relax"
+                }
+            },
+            {
+                "picture": {
+                    "type": "uri",
+                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162732/APL/video_cards/53709496_10155793199212504_9169545866023796736_o.jpg"
+                },
+                "humanLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Balance"
+                }
+            },
+            {
+                "picture": {
+                    "type": "uri",
+                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162734/APL/video_cards/69684302_10156165342662504_7473608648296497152_o.jpg"
+                },
+                "humanLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Calm"
+                }
             }
         ]
-    },
-    "listItems": [
-        {
-            "picture": {
-                "type": "uri",
-                "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162732/APL/video_cards/60360150_10155935158957504_6009695742971609088_o.jpg"
-            },
-            "humanLabel": {
-                "xml:lang": "en",
-                "type": "literal",
-                "value": "Posture"
-            }
-        },
-        {
-            "picture": {
-                "type": "uri",
-                "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162732/APL/video_cards/60101225_10155935158992504_7912407113123495936_o.jpg"
-            },
-            "humanLabel": {
-                "xml:lang": "en",
-                "type": "literal",
-                "value": "Strecthes"
-            }
-        },
-        {
-            "picture": {
-                "type": "uri",
-                "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162732/APL/video_cards/60546674_10155935159027504_4623598853252186112_o.jpg"
-            },
-            "humanLabel": {
-                "xml:lang": "en",
-                "type": "literal",
-                "value": "Grounding"
-            }
-        },
-        {
-            "picture": {
-                "type": "uri",
-                "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162733/APL/video_cards/89666966_10156637094182504_4603664784750018560_n.jpg"
-            },
-            "humanLabel": {
-                "xml:lang": "en",
-                "type": "literal",
-                "value": "Relax"
-            }
-        },
-        {
-            "picture": {
-                "type": "uri",
-                "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162732/APL/video_cards/53709496_10155793199212504_9169545866023796736_o.jpg"
-            },
-            "humanLabel": {
-                "xml:lang": "en",
-                "type": "literal",
-                "value": "Balance"
-            }
-        },
-        {
-            "picture": {
-                "type": "uri",
-                "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162734/APL/video_cards/69684302_10156165342662504_7473608648296497152_o.jpg"
-            },
-            "humanLabel": {
-                "xml:lang": "en",
-                "type": "literal",
-                "value": "Calm"
-            }
-        }
-    ]
+    }
 }

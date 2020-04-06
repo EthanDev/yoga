@@ -55,8 +55,9 @@
         }
     ],
     "styles": {
-        "videoItemStyle":{
-            "values": [{
+        "videoItemStyle": {
+            "values": [
+                {
                     "when": "${!state.focused}",
                     "borderColor": ""
                 },
@@ -66,7 +67,6 @@
                 }
             ]
         },
-        
         "textStylePrimary": {
             "values": {
                 "color": "@colorTextPrimary",
@@ -161,7 +161,6 @@
     },
     "layouts": {
         "videoCardsLayout": {
-            "description": "Video card layout defintion",
             "item": [
                 {
                     "type": "TouchWrapper",
@@ -177,8 +176,8 @@
                             "items": [
                                 {
                                     "type": "Frame",
-                                    "width": "100%",
-                                    "height": "100%",
+                                    "width": "15vw",
+                                    "height": "40vh",
                                     "style": "videoItemStyle",
                                     "borderWidth": 2,
                                     "borderRadius": "10",
@@ -193,7 +192,6 @@
                                             "scale": "best-fill",
                                             "align": "center",
                                             "opacity": 1,
-                                            "spacing": "2vw",
                                             "overlayGradient": {
                                                 "type": "linear",
                                                 "angle": 0,
@@ -213,10 +211,9 @@
                                 },
                                 {
                                     "type": "Text",
-                                    "description": "Video Card Title Text",
                                     "fontFamily": "helvetica",
-                                    "height": "95%",
-                                    "width": "100%",
+                                    "height": "28vh",
+                                    "width": "10vw",
                                     "textAlign": "left",
                                     "textAlignVertical": "bottom",
                                     "style": "videoCardTitle",
@@ -244,7 +241,6 @@
             ]
         },
         "backgroundLeftLayout": {
-            "description": "Page background",
             "parameters": [
                 "bgImg"
             ],
@@ -275,7 +271,6 @@
             ]
         },
         "backgrounBtmLayout": {
-            "description": "Page background",
             "parameters": [
                 "bgImg"
             ],
@@ -306,7 +301,6 @@
             ]
         },
         "logoLayout": {
-            "description": "Main logo for the page",
             "parameters": [
                 "logoUrl"
             ],
@@ -322,7 +316,6 @@
             ]
         },
         "BtnLayout": {
-            "description": "Btn Layout",
             "parameters": [
                 "url"
             ],
@@ -330,15 +323,14 @@
                 {
                     "type": "Image",
                     "opacity": 1,
-                    "width": "100%",
-                    "height": "100%",
+                    "width": "100vw",
+                    "height": "100vh",
                     "source": "${url}",
                     "scale": "best-fit"
                 }
             ]
         },
         "titleTextLayout": {
-            "description": "Title Text",
             "parameters": [
                 "titleText"
             ],
@@ -355,7 +347,6 @@
             ]
         },
         "subTitleTextLayout": {
-            "description": "Sub-Title Text",
             "parameters": [
                 "subTitleText"
             ],
@@ -379,7 +370,6 @@
                 "pTitleText",
                 "pSubTitleText",
                 "pWatchNowBtn",
-                "imageListData",
                 "list"
             ],
             "items": [
@@ -398,7 +388,7 @@
                         },
                         {
                             "type": "Container",
-                            "description": "Logo Container",
+                            "description": "Container for the logo",
                             "position": "absolute",
                             "width": "20vw",
                             "height": "30vh",
@@ -414,7 +404,7 @@
                         },
                         {
                             "type": "Container",
-                            "description": "Title Text Container",
+                            "description": "Container Title under the logo",
                             "position": "absolute",
                             "width": "50vw",
                             "height": "40vh",
@@ -430,7 +420,7 @@
                         },
                         {
                             "type": "Container",
-                            "description": "Sub Title Text Container",
+                            "description": "Container for subtitle text",
                             "position": "absolute",
                             "width": "45vw",
                             "height": "15vh",
@@ -446,7 +436,7 @@
                         },
                         {
                             "type": "Container",
-                            "description": "Watch Now Container",
+                            "description": "Container for watch now button",
                             "position": "absolute",
                             "width": "17vw",
                             "height": "8vh",
@@ -479,27 +469,6 @@
                         },
                         {
                             "type": "Container",
-                            "description": "Cards Bg Container",
-                            "position": "absolute",
-                            "width": "100vw",
-                            "height": "35vh",
-                            "top": "65vh",
-                            "left": "10vw",
-                            "direction": "row",
-                            "items": [
-                                {
-                                    "type": "Frame",
-                                    "width": "100%",
-                                    "height": "100%",
-                                    "backgroundColor": "white",
-                                    "borderTopLeftRadius": 15,
-                                    "opacity": 0
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Container",
-                            "description": " Container for the sequence of cards",
                             "position": "absolute",
                             "left": "5vw",
                             "top": "65vh",
@@ -510,7 +479,6 @@
                             "items": [
                                 {
                                     "type": "Sequence",
-                                    "description": "Sequence of video cards",
                                     "width": "100vw",
                                     "height": "30vh",
                                     "paddingLeft": "@marginLeft",
@@ -520,8 +488,7 @@
                                     "scrollDirection": "horizontal",
                                     "item": [
                                         {
-                                            "type": "videoCardsLayout",
-                                            "description": "definition of video cards"
+                                            "type": "videoCardsLayout"
                                         }
                                     ]
                                 }
@@ -539,12 +506,12 @@
         "items": [
             {
                 "type": "mainLayout",
-                "pBackgroundImage": "${payload.listData.properties.config.backgroundImage}",
-                "pLogoImage": "${payload.listData.properties.config.logoImage}",
-                "pTitleText": "${payload.listData.properties.config.titleText}",
-                "pSubTitleText": "${payload.listData.properties.config.subTitleText}",
-                "pWatchNowBtn": "${payload.listData.properties.config.watchNowBtn}",
-                "list": "${payload.listItems}"
+                "pBackgroundImage": "${payload.currentView.properties.backgroundImage}",
+                "pLogoImage": "${payload.currentView.properties.logoImage}",
+                "pTitleText": "${payload.currentView.properties.titleText}",
+                "pSubTitleText": "${payload.currentView.properties.subTitleText}",
+                "pWatchNowBtn": "${payload.currentView.properties.watchNowBtn}",
+                "list": "${payload.currentView.videoCards}"
             }
         ]
     }
