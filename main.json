@@ -55,6 +55,18 @@
         }
     ],
     "styles": {
+        "videoItemStyle":{
+            "values": [{
+                    "when": "${!state.focused}",
+                    "borderColor": ""
+                },
+                {
+                    "when": "${state.focused}",
+                    "borderColor": "white"
+                }
+            ]
+        },
+        
         "textStylePrimary": {
             "values": {
                 "color": "@colorTextPrimary",
@@ -167,8 +179,9 @@
                                     "type": "Frame",
                                     "width": "100%",
                                     "height": "100%",
+                                    "style": "videoItemStyle",
                                     "borderWidth": 2,
-                                    "borderRadius": "2",
+                                    "borderRadius": "10",
                                     "position": "absolute",
                                     "item": [
                                         {
