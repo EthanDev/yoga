@@ -102,6 +102,19 @@
     "onMount": [],
     "graphics": {},
     "commands": {
+        "cmdHighlightVideoCard": {
+            "parameters": [
+                "pComponentId"
+            ],
+            "commands": [
+                {
+                    "type": "SetValue",
+                    "componentId": "${pComponentId}",
+                    "property": "borderColor",
+                    "value": "white"
+                }
+            ]
+        },
         "flash": {
             "parameters": [
                 "duration",
@@ -170,14 +183,15 @@
                             "type": "Container",
                             "paddingLeft": 16,
                             "paddingRight": 16,
-                            "minWidth": "17vw",
+                            "minWidth": "16vw",
                             "minHeight": "30vh",
                             "inheritParentState": true,
                             "items": [
                                 {
                                     "type": "Frame",
+                                    "id": "videoCard-${ordinal}",
                                     "width": "15vw",
-                                    "height": "40vh",
+                                    "height": "35vh",
                                     "style": "videoItemStyle",
                                     "borderWidth": 2,
                                     "borderRadius": "10",
@@ -197,12 +211,10 @@
                                                 "angle": 0,
                                                 "colorRange": [
                                                     "black",
-                                                    "transparent",
                                                     "transparent"
                                                 ],
                                                 "inputRange": [
                                                     0,
-                                                    0.7,
                                                     1
                                                 ]
                                             }
@@ -212,7 +224,7 @@
                                 {
                                     "type": "Text",
                                     "fontFamily": "helvetica",
-                                    "height": "28vh",
+                                    "height": "34vh",
                                     "width": "10vw",
                                     "textAlign": "left",
                                     "textAlignVertical": "bottom",
@@ -221,6 +233,12 @@
                                     "maxLines": 1
                                 }
                             ]
+                        }
+                    ],
+                    "onFocus": [
+                        {
+                            "type": "cmdHighlightVideoCard",
+                            "pComponentId": "videoCard-${ordinal}"
                         }
                     ],
                     "onPress": [
@@ -258,13 +276,11 @@
                         "angle": 90,
                         "colorRange": [
                             "black",
-                            "black",
                             "transparent"
                         ],
                         "inputRange": [
-                            0,
-                            0.1,
-                            0.8
+                            0.2,
+                            1
                         ]
                     }
                 }
@@ -288,13 +304,11 @@
                         "angle": 360,
                         "colorRange": [
                             "black",
-                            "black",
                             "transparent"
                         ],
                         "inputRange": [
                             0,
-                            0.1,
-                            0.2
+                            0
                         ]
                     }
                 }
@@ -438,10 +452,10 @@
                             "type": "Container",
                             "description": "Container for watch now button",
                             "position": "absolute",
-                            "width": "17vw",
+                            "width": "15vw",
                             "height": "8vh",
                             "top": "50vh",
-                            "left": "4.9vw",
+                            "left": "5vw",
                             "direction": "row",
                             "items": [
                                 {
@@ -459,7 +473,7 @@
                                             "style": "smallTitle",
                                             "width": "100%",
                                             "height": "100%",
-                                            "textAlignVertical": "auto",
+                                            "textAlignVertical": "center",
                                             "text": " ▶   WATCH NOW",
                                             "lineHeight": 2.2
                                         }
@@ -471,16 +485,16 @@
                             "type": "Container",
                             "position": "absolute",
                             "left": "5vw",
-                            "top": "65vh",
+                            "top": "60vh",
                             "width": "100vw",
-                            "height": "35vh",
+                            "height": "40vh",
                             "paddingTop": "10",
                             "direction": "row",
                             "items": [
                                 {
                                     "type": "Sequence",
                                     "width": "100vw",
-                                    "height": "30vh",
+                                    "height": "40vh",
                                     "paddingLeft": "@marginLeft",
                                     "paddingRight": "@marginRight",
                                     "data": "${list}",
