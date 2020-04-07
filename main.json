@@ -55,6 +55,18 @@
         }
     ],
     "styles": {
+        "videoCardStyle": {
+            "values": [
+                {
+                    "when": "${state.hover}",
+                    "borderColor": "white"
+                },
+                {
+                    "when": "${!state.hover}",
+                    "borderColor": ""
+                }
+            ]
+        },
         "textStylePrimary": {
             "values": {
                 "color": "@colorTextPrimary",
@@ -171,20 +183,24 @@
                     "item": [
                         {
                             "type": "Container",
+                            "inheritParentState": true,
+                            "width": "15vw",
+                            "height": "30vh",
                             "paddingLeft": 16,
                             "paddingRight": 16,
-                            "width": "16vw",
-                            "height": "30vh",
                             "items": [
                                 {
                                     "type": "Frame",
-                                    "id": "videoCard1",
+                                    "id": "videoCard-${ordinal}",
+                                    "style": "videoCardStyle",
+                                    "inheritParentState": true,
                                     "width": "15vw",
                                     "height": "30vh",
                                     "position": "absolute",
                                     "item": [
                                         {
                                             "type": "Image",
+                                            "inheritParentState": true,
                                             "opacity": 1,
                                             "width": "15vw",
                                             "height": "30vh",
