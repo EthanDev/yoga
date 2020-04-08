@@ -7,6 +7,10 @@
         {
             "name": "alexa-layouts",
             "version": "1.1.0"
+        },
+        {
+            "name": "alexa-viewport-profiles",
+            "version": "1.1.0"
         }
     ],
     "resources": [
@@ -25,6 +29,7 @@
         },
         {
             "description": "Standard font sizes",
+            "when": "${@viewportProfile == @tvLandscapeXLarge}",
             "dimensions": {
                 "textSizeBody": 48,
                 "textSizePrimary": 20,
@@ -37,15 +42,7 @@
         },
         {
             "description": "Common margins and padding",
-            "dimensions": {
-                "marginTop": 40,
-                "marginLeft": 10,
-                "marginRight": 10,
-                "marginBottom": 40
-            }
-        },
-        {
-            "description": "Common margins and padding",
+            "when": "${@viewportProfile == @tvLandscapeXLarge}",
             "dimensions": {
                 "marginTop": 40,
                 "marginLeft": 10,
@@ -58,12 +55,15 @@
         "videoCardStyle": {
             "values": [
                 {
-                    "when": "${state.hover}",
-                    "borderColor": "white"
+                    "when": "${state.focused}",
+                    "borderColor": "white",
+                    "opacity": "1",
+                    "borderRadius": "10"
                 },
                 {
-                    "when": "${!state.hover}",
-                    "borderColor": ""
+                    "when": "${!state.focused}",
+                    "borderColor": "",
+                    "borderRadius": "11"
                 }
             ]
         },
@@ -115,57 +115,52 @@
                 }
             ]
         },
-        "flash": {
+        "cardDepressCmd": {
             "parameters": [
-                "duration",
-                "delay"
+                "cmdId",
+                "duration"
             ],
+            "description": "When a video card is pressed",
             "commands": [
                 {
+                    "componentId": "${cmdId}",
+                    "duration": "${duration}",
+                    "easing": "ease-in-out",
                     "type": "AnimateItem",
-                    "duration": "${duration * 0.25}",
-                    "delay": "${delay || 0}",
                     "value": [
                         {
-                            "property": "opacity",
-                            "from": 1,
-                            "to": 0
+                            "property": "transform",
+                            "from": [
+                                {
+                                    "scale": 1
+                                }
+                            ],
+                            "to": [
+                                {
+                                    "scale": 0.95
+                                }
+                            ]
                         }
                     ]
                 },
                 {
+                    "componentId": "${cmdId}",
+                    "duration": "${duration}",
+                    "easing": "ease-in-out",
                     "type": "AnimateItem",
-                    "duration": "${duration * 0.25}",
-                    "delay": "${delay || 0}",
                     "value": [
                         {
-                            "property": "opacity",
-                            "from": 0,
-                            "to": 1
-                        }
-                    ]
-                },
-                {
-                    "type": "AnimateItem",
-                    "duration": "${duration * 0.25}",
-                    "delay": "${delay || 0}",
-                    "value": [
-                        {
-                            "property": "opacity",
-                            "from": 0,
-                            "to": 1
-                        }
-                    ]
-                },
-                {
-                    "type": "AnimateItem",
-                    "duration": "${duration * 0.25}",
-                    "delay": "${delay || 0}",
-                    "value": [
-                        {
-                            "property": "opacity",
-                            "from": 0,
-                            "to": 1
+                            "property": "transform",
+                            "from": [
+                                {
+                                    "scale": 0.95
+                                }
+                            ],
+                            "to": [
+                                {
+                                    "scale": 1
+                                }
+                            ]
                         }
                     ]
                 }
@@ -177,71 +172,83 @@
             "item": [
                 {
                     "type": "TouchWrapper",
+                    "onPress": [
+                        {
+                            "type": "cardDepressCmd",
+                            "cmdId": "touch-${ordinal}",
+                            "duration": 250
+                        },
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "videoCardPressed"
+                            ],
+                            "components":[
+                                "videoCard-${ordinal}"
+                            ]
+                        }
+                    ],
                     "id": "touch-${ordinal}",
                     "width": "15vw",
                     "height": "30vh",
-                    "item": [
-                        {
-                            "type": "Container",
-                            "inheritParentState": true,
-                            "width": "15vw",
-                            "height": "30vh",
-                            "paddingLeft": 16,
-                            "paddingRight": 16,
-                            "items": [
-                                {
-                                    "type": "Frame",
-                                    "id": "videoCard-${ordinal}",
-                                    "style": "videoCardStyle",
-                                    "inheritParentState": true,
-                                    "width": "15vw",
-                                    "height": "30vh",
-                                    "position": "absolute",
-                                    "item": [
-                                        {
-                                            "type": "Image",
-                                            "inheritParentState": true,
-                                            "opacity": 1,
-                                            "width": "15vw",
-                                            "height": "30vh",
-                                            "source": "${data.picture.value}",
-                                            "scale": "best-fill",
-                                            "align": "center",
-                                            "borderRadius": "15",
-                                            "overlayGradient": {
-                                                "type": "linear",
-                                                "angle": 0,
-                                                "colorRange": [
-                                                    "black",
-                                                    "transparent"
-                                                ],
-                                                "inputRange": [
-                                                    0,
-                                                    1
-                                                ]
-                                            }
+                    "paddingRight": "15vw",
+                    "item": {
+                        "type": "Container",
+                        "inheritParentState": true,
+                        "width": "15vw",
+                        "height": "30vh",
+                        "items": [
+                            {
+                                "type": "Frame",
+                                "id": "videoCard-${ordinal}",
+                                "style": "videoCardStyle",
+                                "inheritParentState": true,
+                                "width": "15vw",
+                                "height": "29.4vh",
+                                "position": "absolute",
+                                "item": [
+                                    {
+                                        "type": "Image",
+                                        "inheritParentState": true,
+                                        "opacity": 1,
+                                        "width": "14.4vw",
+                                        "height": "28.4vh",
+                                        "source": "${data.picture.value}",
+                                        "scale": "best-fill",
+                                        "align": "left",
+                                        "borderRadius": "9",
+                                        "overlayGradient": {
+                                            "type": "linear",
+                                            "angle": 0,
+                                            "colorRange": [
+                                                "black",
+                                                "transparent"
+                                            ],
+                                            "inputRange": [
+                                                0,
+                                                1
+                                            ]
                                         }
-                                    ],
-                                    "borderRadius": "15",
-                                    "borderWidth": "0.4vw"
-                                },
-                                {
-                                    "type": "Text",
-                                    "style": "videoCardTitle",
-                                    "width": "10vw",
-                                    "height": "3vh",
-                                    "position": "relative",
-                                    "textAlign": "left",
-                                    "textAlignVertical": "bottom",
-                                    "fontFamily": "helvetica",
-                                    "maxLines": 1,
-                                    "text": "${data.humanLabel.value}",
-                                    "left": "0.2vw",
-                                    "top": "25vh"
-                                }
-                            ]
-                        }
-                    ]
+                                    }
+                                ],
+                                "borderWidth": "0.3vw"
+                            },
+                            {
+                                "type": "Text",
+                                "style": "videoCardTitle",
+                                "width": "10vw",
+                                "height": "3vh",
+                                "position": "relative",
+                                "textAlign": "left",
+                                "textAlignVertical": "bottom",
+                                "fontFamily": "helvetica",
+                                "maxLines": 1,
+                                "text": "${data.humanLabel.value}",
+                                "left": "1vw",
+                                "top": "25vh"
+                            }
+                        ]
+                    }
                 }
             ]
         },
@@ -308,6 +315,7 @@
             "items": [
                 {
                     "type": "Image",
+                    "id": "logo1",
                     "opacity": 1,
                     "width": "100%",
                     "height": "100%",
@@ -363,6 +371,67 @@
                 }
             ]
         },
+        "watchNowBtnLayout": {
+            "parameters": [
+                "pBtnText"
+            ],
+            "item": [
+                {
+                    "type": "TouchWrapper",
+                    "onPress": [
+                        {
+                            "type": "cardDepressCmd",
+                            "cmdId": "touch-${ordinal}",
+                            "duration": 250
+                        },
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "watchNowBtnPressed"
+                            ]
+                        }
+                    ],
+                    "width": "15vw",
+                    "height": "8vh",
+                    "top": "50vh",
+                    "left": "5vw",
+                    "item": [
+                        {
+                            "type": "Container",
+                            "description": "Container for watch now button",
+                            "position": "absolute",
+                            "width": "15vw",
+                            "height": "8vh",
+                            "top": "50vh",
+                            "left": "5vw",
+                            "direction": "row",
+                            "items": [
+                                {
+                                    "type": "Frame",
+                                    "width": "15vw",
+                                    "height": "8vh",
+                                    "backgroundColor": "#202F58",
+                                    "borderColor": "white",
+                                    "borderWidth": 1.5,
+                                    "borderRadius": "50",
+                                    "item": [
+                                        {
+                                            "type": "Text",
+                                            "style": "smallTitle",
+                                            "width": "15vw",
+                                            "height": "8vh",
+                                            "textAlignVertical": "center",
+                                            "text": "${pBtnText}",
+                                            "lineHeight": 2.2
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
         "mainLayout": {
             "parameters": [
                 "pBackgroundImage",
@@ -388,6 +457,7 @@
                             "bgImg": "${transparentBtmBg}"
                         },
                         {
+                            "when": "${@viewportProfile == @tvLandscapeXLarge}",
                             "type": "Container",
                             "description": "Container for the logo",
                             "position": "absolute",
@@ -404,6 +474,7 @@
                             ]
                         },
                         {
+                            "when": "${@viewportProfile == @tvLandscapeXLarge}",
                             "type": "Container",
                             "description": "Container Title under the logo",
                             "position": "absolute",
@@ -420,6 +491,7 @@
                             ]
                         },
                         {
+                            "when": "${@viewportProfile == @tvLandscapeXLarge}",
                             "type": "Container",
                             "description": "Container for subtitle text",
                             "position": "absolute",
@@ -436,44 +508,16 @@
                             ]
                         },
                         {
-                            "type": "Container",
-                            "description": "Container for watch now button",
-                            "position": "absolute",
-                            "width": "15vw",
-                            "height": "8vh",
-                            "top": "50vh",
-                            "left": "5vw",
-                            "direction": "row",
-                            "items": [
-                                {
-                                    "type": "Frame",
-                                    "id": "videoCard1",
-                                    "width": "100%",
-                                    "height": "100%",
-                                    "backgroundColor": "#202F58",
-                                    "borderColor": "white",
-                                    "borderWidth": 2,
-                                    "borderRadius": "25",
-                                    "position": "absolute",
-                                    "item": [
-                                        {
-                                            "type": "Text",
-                                            "style": "smallTitle",
-                                            "width": "100%",
-                                            "height": "100%",
-                                            "textAlignVertical": "center",
-                                            "text": " ▶   WATCH NOW",
-                                            "lineHeight": 2.2
-                                        }
-                                    ]
-                                }
-                            ]
+                            "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                            "type": "watchNowBtnLayout",
+                            "pBtnText": " ▶   WATCH NOW"
                         },
                         {
                             "type": "Container",
+                            "when": "${@viewportProfile == @tvLandscapeXLarge}",
                             "width": "100vw",
                             "height": "35vh",
-                            "paddingTop": "10",
+                            "paddingTop": "5",
                             "direction": "row",
                             "items": [
                                 {
