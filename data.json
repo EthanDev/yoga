@@ -10,6 +10,37 @@
                 "watchNowBtn": "https://res.cloudinary.com/snapitdirect/image/upload/v1585949903/APL/Watch_Now.png",
                 "transparentBtmBg": "https://res.cloudinary.com/snapitdirect/image/upload/v1586163992/APL/blank.png"
         },
+        "backgroundLeftLayout":[{
+            "opacity": "1",
+            "width": "100vw",
+            "height": "100vh",
+            "source": "https://res.cloudinary.com/snapitdirect/image/upload/v1586071803/APL/bg1.png",
+            "scale": "best-fill",
+            "position": "absolute",
+            "overlayGradient":{
+                "type": "linear",
+                "angle": "90",
+                "colorRange": ["black","transparent"],
+                "inputRange":["0.2","1"]
+            }
+        }],
+        "backgroundBtmLayout":[
+            {
+                "opacity": "1",
+                "width": "100vw",
+                "height": "100vh",
+                "source": "https://res.cloudinary.com/snapitdirect/image/upload/v1586163992/APL/blank.png",
+                "scale": "best-fill",
+                "position": "absolute",
+                "overlayGradient":{
+                    "type": "linear",
+                    "angle": "360",
+                    "colorRange": ["black","transparent"],
+                    "inputRange":["0","0.2"]
+                }
+                
+            }
+        ],
         "videoCards": [
             {
                 "picture": {
