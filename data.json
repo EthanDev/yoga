@@ -2,45 +2,13 @@
     "currentView": {
         "type": "object",
         "properties": {
-                "backgroundImage1": "https://source.unsplash.com/1920x1080/?yoga",
-                "backgroundImage": "https://res.cloudinary.com/snapitdirect/image/upload/v1586071803/APL/bg1.png",
-                "logoImage": "https://res.cloudinary.com/snapitdirect/image/upload/v1585944136/APL/Yoga.png",
-                "titleText": "Yoga in the comfort of your home",
-                "subTitleText": "Expand, your mind, nuture your body, and elevate your soul with my handpicked collection of mediations, yoga practices and lifestyle videos.",
-                "watchNowBtn": "https://res.cloudinary.com/snapitdirect/image/upload/v1585949903/APL/Watch_Now.png",
-                "transparentBtmBg": "https://res.cloudinary.com/snapitdirect/image/upload/v1586163992/APL/blank.png"
+            "backgroundImage": "https://res.cloudinary.com/snapitdirect/image/upload/v1586071803/APL/bg1.png",
+            "logoImage": "https://res.cloudinary.com/snapitdirect/image/upload/v1585944136/APL/Yoga.png",
+            "titleText": "Yoga in the comfort of your home",
+            "subTitleText": "Expand, your mind, nuture your body, and elevate your soul with my handpicked collection of mediations, yoga practices and lifestyle videos.",
+            "watchNowBtn": "https://res.cloudinary.com/snapitdirect/image/upload/v1585949903/APL/Watch_Now.png",
+            "transparentBg": "https://res.cloudinary.com/snapitdirect/image/upload/v1586163992/APL/blank.png"
         },
-        "backgroundLeftLayout":[{
-            "opacity": "1",
-            "width": "100vw",
-            "height": "100vh",
-            "source": "https://res.cloudinary.com/snapitdirect/image/upload/v1586071803/APL/bg1.png",
-            "scale": "best-fill",
-            "position": "absolute",
-            "overlayGradient":{
-                "type": "linear",
-                "angle": "90",
-                "colorRange": ["black","transparent"],
-                "inputRange":["0.2","1"]
-            }
-        }],
-        "backgroundBtmLayout":[
-            {
-                "opacity": "1",
-                "width": "100vw",
-                "height": "100vh",
-                "source": "https://res.cloudinary.com/snapitdirect/image/upload/v1586163992/APL/blank.png",
-                "scale": "best-fill",
-                "position": "absolute",
-                "overlayGradient":{
-                    "type": "linear",
-                    "angle": "360",
-                    "colorRange": ["black","transparent"],
-                    "inputRange":["0","0.2"]
-                }
-                
-            }
-        ],
         "videoCards": [
             {
                 "picture": {

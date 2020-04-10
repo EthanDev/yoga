@@ -52,6 +52,7 @@
         }
     ],
     "styles": {
+        "subTitle": {},
         "videoCardStyle": {
             "values": [
                 {
@@ -70,18 +71,26 @@
         "backgroundLeft": {
             "values": {}
         },
-        "textStylePrimary": {
+        "titleTextLayout": {
             "values": {
                 "color": "@colorTextPrimary",
                 "fontWeight": "400",
-                "fontSize": "@textSizePrimary"
+                "fontSize": "@textSizePrimary",
+                "fontFamily": "helvetica",
+                "width": "100%",
+                "textAlign": "left",
+                "maxLines": 2
             }
         },
         "subTitlePrimary": {
             "values": {
                 "color": "@colorTextPrimary",
                 "fontWeight": "300",
-                "fontSize": "@textSizeSecondary"
+                "fontSize": "@textSizeSecondary",
+                "fontFamily": "helvetica",
+                "width": "100%",
+                "textAlign": "left",
+                "maxLines": 3
             }
         },
         "videoCardTitle": {
@@ -287,23 +296,24 @@
             ],
             "items": [
                 {
+                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
                     "type": "Image",
-                    "opacity": "${payload.currentView.backgroundLeftLayout[0].opacity}",
-                    "width": "${payload.currentView.backgroundLeftLayout[0].width}",
-                    "height": "${payload.currentView.backgroundLeftLayout[0].height}",
-                    "source": "${payload.currentView.backgroundLeftLayout[0].source}",
-                    "scale": "${payload.currentView.backgroundLeftLayout[0].scale}",
-                    "position": "${payload.currentView.backgroundLeftLayout[0].position}",
+                    "opacity": 1,
+                    "width": "100vw",
+                    "height": "100vh",
+                    "source": "${bgImg}",
+                    "scale": "best-fill",
+                    "position": "absolute",
                     "overlayGradient": {
-                        "type": "${payload.currentView.backgroundLeftLayout[0].overlayGradient.type}",
-                        "angle": "${payload.currentView.backgroundLeftLayout[0].overlayGradient.angle}",
+                        "type": "linear",
+                        "angle": 90,
                         "colorRange": [
-                            "${payload.currentView.backgroundLeftLayout[0].overlayGradient.colorRange[0]}",
-                            "${payload.currentView.backgroundLeftLayout[0].overlayGradient.colorRange[1]}"
+                            "black",
+                            "transparent"
                         ],
                         "inputRange": [
-                            "${payload.currentView.backgroundLeftLayout[0].overlayGradient.inputRange[0]}",
-                            "${payload.currentView.backgroundLeftLayout[0].overlayGradient.inputRange[1]}"
+                            0.2,
+                            0.5
                         ]
                     }
                 }
@@ -311,60 +321,30 @@
         },
         "backgrounBtmLayout": {
             "parameters": [
-                "bgImg"
+                "bgImgTransparent"
             ],
             "items": [
                 {
+                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
                     "type": "Image",
-                    "opacity": "${payload.currentView.backgroundBtmLayout[0].opacity}",
-                    "width": "${payload.currentView.backgroundBtmLayout[0].width}",
-                    "height": "${payload.currentView.backgroundBtmLayout[0].height}",
-                    "source": "${payload.currentView.backgroundBtmLayout[0].source}",
-                    "scale": "${payload.currentView.backgroundBtmLayout[0].scale}",
-                    "position": "${payload.currentView.backgroundBtmLayout[0].position}",
-                    "overlayGradient": {
-                        "type": "${payload.currentView.backgroundBtmLayout[0].overlayGradient.type}",
-                        "angle": "${payload.currentView.backgroundBtmLayout[0].overlayGradient.angle}",
-                        "colorRange": [
-                            "${payload.currentView.backgroundLeftLayout[0].overlayGradient.colorRange[0]}",
-                            "${payload.currentView.backgroundLeftLayout[0].overlayGradient.colorRange[1]}"
-                        ],
-                        "inputRange": [
-                            "${payload.currentView.backgroundLeftLayout[0].overlayGradient.inputRange[0]}",
-                            "${payload.currentView.backgroundLeftLayout[0].overlayGradient.inputRange[1]}"
-                        ]
-                    }
-                }
-            ]
-        },
-        "logoLayoutImg": {
-            "parameters": [
-                "logoUrl"
-            ],
-            "items": [
-                {
-                    "type": "Image",
-                    "id": "logo1",
-                    "opacity": 1,
-                    "width": "100%",
-                    "height": "100%",
-                    "source": "${logoUrl}",
-                    "scale": "best-fit"
-                }
-            ]
-        },
-        "BtnLayout": {
-            "parameters": [
-                "url"
-            ],
-            "items": [
-                {
-                    "type": "Image",
-                    "opacity": 1,
+                    "opacity": "1",
                     "width": "100vw",
                     "height": "100vh",
-                    "source": "${url}",
-                    "scale": "best-fit"
+                    "source": "${bgImgTransparent}",
+                    "scale": "best-fill",
+                    "position": "absolute",
+                    "overlayGradient": {
+                        "type": "linear",
+                        "angle": "360",
+                        "colorRange": [
+                            "black",
+                            "transparent"
+                        ],
+                        "inputRange": [
+                            "0",
+                            "0.1"
+                        ]
+                    }
                 }
             ]
         },
@@ -386,12 +366,8 @@
                     "items": [
                         {
                             "type": "Text",
-                            "fontFamily": "helvetica",
-                            "width": "100%",
-                            "textAlign": "left",
-                            "style": "textStylePrimary",
-                            "text": "${titleText}",
-                            "maxLines": 2
+                            "style": "titleTextLayout",
+                            "text": "${titleText}"
                         }
                     ]
                 }
@@ -415,12 +391,8 @@
                     "items": [
                         {
                             "type": "Text",
-                            "fontFamily": "helvetica",
-                            "width": "100%",
-                            "textAlign": "left",
                             "style": "subTitlePrimary",
-                            "text": "${subTitleText}",
-                            "maxLines": 3
+                            "text": "${subTitleText}"
                         }
                     ]
                 }
@@ -448,7 +420,7 @@
                         }
                     ],
                     "id": "btnTouch",
-                    "width": "15vw",
+                    "width": "16vw",
                     "height": "8vh",
                     "top": "50vh",
                     "left": "5vw",
@@ -457,7 +429,7 @@
                             "type": "Container",
                             "description": "Container for watch now button",
                             "position": "absolute",
-                            "width": "15vw",
+                            "width": "16vw",
                             "height": "8vh",
                             "top": "50vh",
                             "left": "5vw",
@@ -465,7 +437,7 @@
                             "items": [
                                 {
                                     "type": "Frame",
-                                    "width": "15vw",
+                                    "width": "16vw",
                                     "height": "8vh",
                                     "backgroundColor": "#202F58",
                                     "borderColor": "white",
@@ -476,10 +448,10 @@
                                             "type": "Text",
                                             "style": "smallTitle",
                                             "width": "15vw",
-                                            "height": "8vh",
+                                            "height": "7vh",
                                             "textAlignVertical": "center",
                                             "text": "${pBtnText}",
-                                            "lineHeight": 2.2
+                                            "lineHeight": 2
                                         }
                                     ]
                                 }
@@ -511,8 +483,8 @@
                             "opacity": 1,
                             "width": "100%",
                             "height": "100%",
-                            "source": "${logoUrl}",
-                            "scale": "best-fit"
+                            "scale": "best-fit",
+                            "source": "${logoUrl}"
                         }
                     ]
                 }
@@ -521,7 +493,7 @@
         "mainLayout": {
             "parameters": [
                 "pBackgroundImage",
-                "transparentBtmBg",
+                "pTransparentBg",
                 "pLogoImage",
                 "pTitleText",
                 "pSubTitleText",
@@ -540,7 +512,7 @@
                         },
                         {
                             "type": "backgrounBtmLayout",
-                            "bgImg": "${transparentBtmBg}"
+                            "bgImgTransparent": "${pTransparentBg}"
                         },
                         {
                             "type": "logoLayout",
@@ -556,7 +528,7 @@
                         },
                         {
                             "type": "watchNowBtnLayout",
-                            "pBtnText": " ▶   WATCH NOW"
+                            "pBtnText": " ▶   WATCH NOW  "
                         },
                         {
                             "type": "videoCardsLayout",
@@ -575,6 +547,7 @@
             {
                 "type": "mainLayout",
                 "pBackgroundImage": "${payload.currentView.properties.backgroundImage}",
+                "pTransparentBg": "${payload.currentView.properties.transparentBg}",
                 "pLogoImage": "${payload.currentView.properties.logoImage}",
                 "pTitleText": "${payload.currentView.properties.titleText}",
                 "pSubTitleText": "${payload.currentView.properties.subTitleText}",
