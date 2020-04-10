@@ -218,6 +218,147 @@
         }
     },
     "layouts": {
+        "logoLayout": {
+            "parameters": [
+                "logoUrl"
+            ],
+            "item": [
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "type": "Container",
+                    "position": "absolute",
+                    "width": "20vw",
+                    "height": "30vh",
+                    "top": "3vh",
+                    "left": "2vw",
+                    "direction": "row",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "id": "logo1",
+                            "opacity": 1,
+                            "width": "100%",
+                            "height": "100%",
+                            "scale": "best-fit",
+                            "source": "${logoUrl}"
+                        }
+                    ]
+                }
+            ]
+        },
+        "titleTextLayout": {
+            "parameters": [
+                "titleText"
+            ],
+            "items": [
+                {
+                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                    "type": "Container",
+                    "description": "Container Title under the logo",
+                    "position": "absolute",
+                    "width": "50vw",
+                    "height": "40vh",
+                    "top": "30vh",
+                    "left": "5vw",
+                    "direction": "column",
+                    "items": [
+                        {
+                            "type": "Text",
+                            "style": "titleText",
+                            "text": "${titleText}"
+                        }
+                    ]
+                }
+            ]
+        },
+        "subTitleTextLayout": {
+            "parameters": [
+                "subTitleText"
+            ],
+            "items": [
+                {
+                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                    "type": "Container",
+                    "description": "Container for subtitle text",
+                    "position": "absolute",
+                    "width": "45vw",
+                    "height": "15vh",
+                    "top": "37vh",
+                    "left": "5vw",
+                    "direction": "column",
+                    "items": [
+                        {
+                            "type": "Text",
+                            "style": "subTitlePrimary",
+                            "text": "${subTitleText}"
+                        }
+                    ]
+                }
+            ]
+        },
+        "watchNowBtnLayout": {
+            "parameters": [
+                "pBtnText"
+            ],
+            "item": [
+                {
+                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                    "type": "TouchWrapper",
+                    "onPress": [
+                        {
+                            "type": "cardDepressCmd",
+                            "cmdId": "btnTouch",
+                            "duration": 250
+                        },
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "watchNowBtnPressed"
+                            ]
+                        }
+                    ],
+                    "id": "btnTouch",
+                    "width": "16vw",
+                    "height": "8vh",
+                    "top": "50vh",
+                    "left": "5vw",
+                    "item": [
+                        {
+                            "type": "Container",
+                            "description": "Container for watch now button",
+                            "position": "absolute",
+                            "width": "16vw",
+                            "height": "8vh",
+                            "top": "50vh",
+                            "left": "5vw",
+                            "direction": "row",
+                            "items": [
+                                {
+                                    "type": "Frame",
+                                    "width": "16vw",
+                                    "height": "8vh",
+                                    "backgroundColor": "#202F58",
+                                    "borderColor": "white",
+                                    "borderWidth": 1.5,
+                                    "borderRadius": "50",
+                                    "item": [
+                                        {
+                                            "type": "Text",
+                                            "style": "smallTitle",
+                                            "width": "15vw",
+                                            "height": "7vh",
+                                            "textAlignVertical": "center",
+                                            "text": "${pBtnText}",
+                                            "lineHeight": 2
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
         "videoCardsLayout": {
             "parameters": [
                 "list"
@@ -405,148 +546,6 @@
                             0.1
                         ]
                     }
-                }
-            ]
-        },
-        "titleTextLayout": {
-            "parameters": [
-                "titleText"
-            ],
-            "items": [
-                {
-                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
-                    "type": "Container",
-                    "description": "Container Title under the logo",
-                    "position": "absolute",
-                    "width": "50vw",
-                    "height": "40vh",
-                    "top": "30vh",
-                    "left": "5vw",
-                    "direction": "column",
-                    "items": [
-                        {
-                            "type": "Text",
-                            "style": "titleText",
-                            "text": "${titleText}"
-                        }
-                    ]
-                }
-            ]
-        },
-        "subTitleTextLayout": {
-            "parameters": [
-                "subTitleText"
-            ],
-            "items": [
-                {
-                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
-                    "type": "Container",
-                    "description": "Container for subtitle text",
-                    "position": "absolute",
-                    "width": "45vw",
-                    "height": "15vh",
-                    "top": "37vh",
-                    "left": "5vw",
-                    "direction": "column",
-                    "items": [
-                        {
-                            "type": "Text",
-                            "style": "subTitlePrimary",
-                            "text": "${subTitleText}"
-                        }
-                    ]
-                }
-            ]
-        },
-        "watchNowBtnLayout": {
-            "parameters": [
-                "pBtnText"
-            ],
-            "item": [
-                {
-                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
-                    "type": "TouchWrapper",
-                    "onPress": [
-                        {
-                            "type": "cardDepressCmd",
-                            "cmdId": "btnTouch",
-                            "duration": 250
-                        },
-                        {
-                            "type": "SendEvent",
-                            "arguments": [
-                                "watchNowBtnPressed"
-                            ]
-                        }
-                    ],
-                    "id": "btnTouch",
-                    "width": "16vw",
-                    "height": "8vh",
-                    "top": "50vh",
-                    "left": "5vw",
-                    "item": [
-                        {
-                            "type": "Container",
-                            "description": "Container for watch now button",
-                            "position": "absolute",
-                            "width": "16vw",
-                            "height": "8vh",
-                            "top": "50vh",
-                            "left": "5vw",
-                            "direction": "row",
-                            "items": [
-                                {
-                                    "type": "Frame",
-                                    "width": "16vw",
-                                    "height": "8vh",
-                                    "backgroundColor": "#202F58",
-                                    "borderColor": "white",
-                                    "borderWidth": 1.5,
-                                    "borderRadius": "50",
-                                    "item": [
-                                        {
-                                            "type": "Text",
-                                            "style": "smallTitle",
-                                            "width": "15vw",
-                                            "height": "7vh",
-                                            "textAlignVertical": "center",
-                                            "text": "${pBtnText}",
-                                            "lineHeight": 2
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        "logoLayout": {
-            "parameters": [
-                "logoUrl"
-            ],
-            "item": [
-                {
-                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
-                    "type": "Container",
-                    "description": "Container for the logo",
-                    "position": "absolute",
-                    "width": "20vw",
-                    "height": "30vh",
-                    "top": "3vh",
-                    "left": "2vw",
-                    "direction": "row",
-                    "items": [
-                        {
-                            "type": "Image",
-                            "id": "logo1",
-                            "opacity": 1,
-                            "width": "100%",
-                            "height": "100%",
-                            "scale": "best-fit",
-                            "source": "${logoUrl}"
-                        }
-                    ]
                 }
             ]
         },
