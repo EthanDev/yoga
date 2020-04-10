@@ -29,12 +29,14 @@
         },
         {
             "description": "Standard font sizes",
-            "when": "${@viewportProfile == @tvLandscapeXLarge}",
             "dimensions": {
                 "textSizeBody": 48,
                 "textSizePrimary": 20,
+                "textSizePrimary-small": 30,
                 "textSizeSecondary": 15,
+                "textSizeSecondary-small": 20,
                 "textSizeTertiary": 18,
+                "textSizeTertiary-small": 20,
                 "textSizeDetails": 20,
                 "textSizeSecondaryHint": 25,
                 "videoCardTextSize": 13
@@ -42,7 +44,6 @@
         },
         {
             "description": "Common margins and padding",
-            "when": "${@viewportProfile == @tvLandscapeXLarge}",
             "dimensions": {
                 "marginTop": 40,
                 "marginLeft": 10,
@@ -71,11 +72,7 @@
             "values": {
                 "color": "@colorTextPrimary",
                 "fontWeight": "400",
-                "fontSize": "@textSizePrimary",
-                "fontFamily": "helvetica",
-                "width": "100%",
-                "textAlign": "left",
-                "maxLines": 2
+                "fontSize": "@textSizePrimary"
             }
         },
         "backgroundBtm": {
@@ -131,6 +128,17 @@
                 "maxLines": 3
             }
         },
+        "subTitlePrimarySmall": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "300",
+                "fontSize": "@textSizeSecondary-small",
+                "fontFamily": "helvetica",
+                "width": "100%",
+                "textAlign": "left",
+                "maxLines": 5
+            }
+        },
         "videoCardTitle": {
             "values": {
                 "color": "@colorTextPrimary",
@@ -146,6 +154,16 @@
                 "textAlign": "center",
                 "textAlignVertical": "center",
                 "fontSize": "@textSizeTertiary"
+            }
+        },
+        "smallTitle-small": {
+            "values": {
+                "color": "#EDE1CB",
+                "fontFamily": "helvetica",
+                "fontWeight": "700",
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "fontSize": "@textSizeTertiary-small"
             }
         }
     },
@@ -252,7 +270,6 @@
             ],
             "items": [
                 {
-                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
                     "type": "Container",
                     "description": "Container Title under the logo",
                     "position": "absolute",
@@ -263,8 +280,27 @@
                     "direction": "column",
                     "items": [
                         {
+                            "when": "${@viewportProfile == @hubLandscapeSmall}",
                             "type": "Text",
-                            "style": "titleText",
+                            "color": "@colorTextPrimary",
+                            "fontWeight": "400",
+                            "fontSize": "@textSizePrimary-small",
+                            "fontFamily": "helvetica",
+                            "width": "100%",
+                            "textAlign": "left",
+                            "maxLines": 2,
+                            "text": "${titleText}"
+                        },
+                        {
+                            "when": "${@viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                            "type": "Text",
+                            "color": "@colorTextPrimary",
+                            "fontWeight": "400",
+                            "fontSize": "@textSizePrimary",
+                            "fontFamily": "helvetica",
+                            "width": "100%",
+                            "textAlign": "left",
+                            "maxLines": 2,
                             "text": "${titleText}"
                         }
                     ]
@@ -277,7 +313,25 @@
             ],
             "items": [
                 {
-                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                    "when": "${@viewportProfile == @hubLandscapeSmall}",
+                    "type": "Container",
+                    "description": "Container for subtitle text",
+                    "position": "absolute",
+                    "width": "45vw",
+                    "height": "40vh",
+                    "top": "40vh",
+                    "left": "5vw",
+                    "direction": "column",
+                    "items": [
+                        {
+                            "type": "Text",
+                            "style": "subTitlePrimarySmall",
+                            "text": "${subTitleText}"
+                        }
+                    ]
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
                     "type": "Container",
                     "description": "Container for subtitle text",
                     "position": "absolute",
@@ -302,7 +356,62 @@
             ],
             "item": [
                 {
-                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                    "when": "${@viewportProfile == @hubLandscapeSmall}",
+                    "type": "TouchWrapper",
+                    "onPress": [
+                        {
+                            "type": "cardDepressCmd",
+                            "cmdId": "btnTouch",
+                            "duration": 250
+                        },
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "watchNowBtnPressed"
+                            ]
+                        }
+                    ],
+                    "id": "btnTouch",
+                    "width": "16vw",
+                    "height": "8vh",
+                    "top": "63vh",
+                    "left": "5vw",
+                    "item": [
+                        {
+                            "type": "Container",
+                            "description": "Container for watch now button",
+                            "position": "absolute",
+                            "width": "20vw",
+                            "height": "14vh",
+                            "top": "50vh",
+                            "left": "5vw",
+                            "direction": "row",
+                            "items": [
+                                {
+                                    "type": "Frame",
+                                    "width": "20vw",
+                                    "height": "14vh",
+                                    "backgroundColor": "#202F58",
+                                    "borderColor": "white",
+                                    "borderWidth": 1.5,
+                                    "borderRadius": "50",
+                                    "item": [
+                                        {
+                                            "type": "Text",
+                                            "style": "smallTitle-small",
+                                            "width": "19vw",
+                                            "height": "13vh",
+                                            "textAlign": "center",
+                                            "text": "${pBtnText}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
                     "type": "TouchWrapper",
                     "onPress": [
                         {
@@ -587,7 +696,7 @@
                         },
                         {
                             "type": "watchNowBtnLayout",
-                            "pBtnText": " ▶   WATCH NOW  "
+                            "pBtnText": "▶   WATCH NOW  "
                         },
                         {
                             "type": "videoCardsLayout",
