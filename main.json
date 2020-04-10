@@ -52,7 +52,6 @@
         }
     ],
     "styles": {
-        "subTitle": {},
         "videoCardStyle": {
             "values": [
                 {
@@ -68,10 +67,7 @@
                 }
             ]
         },
-        "backgroundLeft": {
-            "values": {}
-        },
-        "titleTextLayout": {
+        "titleText": {
             "values": {
                 "color": "@colorTextPrimary",
                 "fontWeight": "400",
@@ -80,6 +76,48 @@
                 "width": "100%",
                 "textAlign": "left",
                 "maxLines": 2
+            }
+        },
+        "backgroundBtm": {
+            "values": {
+                "opacity": 1,
+                "width": "100vw",
+                "height": "100vh",
+                "scale": "best-fill",
+                "position": "absolute",
+                "overlayGradient": {
+                    "type": "linear",
+                    "angle": 360,
+                    "colorRange": [
+                        "black",
+                        "transparent"
+                    ],
+                    "inputRange": [
+                        0,
+                        0.1
+                    ]
+                }
+            }
+        },
+        "backgroundBtmSmall": {
+            "values": {
+                "opacity": 1,
+                "width": "100vw",
+                "height": "100vh",
+                "scale": "best-fill",
+                "position": "absolute",
+                "overlayGradient": {
+                    "type": "linear",
+                    "angle": 360,
+                    "colorRange": [
+                        "black",
+                        "transparent"
+                    ],
+                    "inputRange": [
+                        0,
+                        0.4
+                    ]
+                }
             }
         },
         "subTitlePrimary": {
@@ -296,7 +334,7 @@
             ],
             "items": [
                 {
-                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
                     "type": "Image",
                     "opacity": 1,
                     "width": "100vw",
@@ -325,9 +363,9 @@
             ],
             "items": [
                 {
-                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                    "when": "${@viewportProfile == @hubLandscapeSmall}",
                     "type": "Image",
-                    "opacity": "1",
+                    "opacity": 1,
                     "width": "100vw",
                     "height": "100vh",
                     "source": "${bgImgTransparent}",
@@ -335,14 +373,36 @@
                     "position": "absolute",
                     "overlayGradient": {
                         "type": "linear",
-                        "angle": "360",
+                        "angle": 360,
                         "colorRange": [
                             "black",
                             "transparent"
                         ],
                         "inputRange": [
-                            "0",
-                            "0.1"
+                            0,
+                            0.5
+                        ]
+                    }
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "type": "Image",
+                    "opacity": 1,
+                    "width": "100vw",
+                    "height": "100vh",
+                    "source": "${bgImgTransparent}",
+                    "scale": "best-fill",
+                    "position": "absolute",
+                    "overlayGradient": {
+                        "type": "linear",
+                        "angle": 360,
+                        "colorRange": [
+                            "black",
+                            "transparent"
+                        ],
+                        "inputRange": [
+                            0,
+                            0.1
                         ]
                     }
                 }
@@ -366,7 +426,7 @@
                     "items": [
                         {
                             "type": "Text",
-                            "style": "titleTextLayout",
+                            "style": "titleText",
                             "text": "${titleText}"
                         }
                     ]
