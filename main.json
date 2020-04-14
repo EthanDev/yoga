@@ -21,14 +21,16 @@
         {
             "description": "Stock color for the light theme",
             "colors": {
-                "colorTextPrimary": "#ffffff"
+                "colorTextPrimary": "#ffffff",
+                "btnBgColor": "#202F58"
             }
         },
         {
             "description": "Stock color for the dark theme",
             "when": "${viewport.theme == 'dark'}",
             "colors": {
-                "colorTextPrimary": "#ffffff"
+                "colorTextPrimary": "#ffffff",
+                "btnBgColor": "#202F58"
             }
         },
         {
@@ -166,17 +168,6 @@
                 "maxLines": 1
             }
         },
-        "btnTitle": {
-            "description": "btn title",
-            "values": {
-                "color": "#EDE1CB",
-                "fontFamily": "helvetica",
-                "fontWeight": "300",
-                "textAlign": "center",
-                "textAlignVertical": "center",
-                "fontSize": "@textSizeTertiary"
-            }
-        },
         "backgroundBtmSmall": {
             "description": "Echo Show 5 -  Bottom gradient",
             "values": {
@@ -199,6 +190,17 @@
                 }
             }
         },
+        "btnTitle": {
+            "description": "btn title",
+            "values": {
+                "color": "#EDE1CB",
+                "fontFamily": "helvetica",
+                "fontWeight": "@fontWeightMedium",
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "fontSize": "@textSizeTertiary"
+            }
+        },
         "btnTitle-small": {
             "description": "Echo Show 5 btn title",
             "values": {
@@ -210,7 +212,7 @@
                 "fontSize": "@textSizeTertiary-small"
             }
         },
-        "circleCard-small": {
+        "circleCardTextSmall": {
             "description": "Echo Show 5 card style",
             "values": {
                 "color": "white",
@@ -359,7 +361,7 @@
                                     "width": "30vw",
                                     "height": "30vh",
                                     "text": "videos",
-                                    "style": "circleCard-small"
+                                    "style": "circleCardTextSmall"
                                 }
                             ]
                         }
@@ -443,7 +445,7 @@
                                                             "width": "14.4vw",
                                                             "height": "28.7vh",
                                                             "text": "${data.humanLabel.value}",
-                                                            "style": "circleCard-small"
+                                                            "style": "circleCardTextSmall"
                                                         }
                                                     ]
                                                 }
@@ -465,10 +467,10 @@
                 {
                     "type": "Container",
                     "position": "absolute",
-                    "width": "${@viewportProfile == @hubRoundSmall ? '40vw' : '20vw'}",
-                    "height": "${@viewportProfile == @hubRoundSmall ? '40vh' : '30vh'}",
-                    "top": "${@viewportProfile == @hubRoundSmall ? '0vh' : '3vh'}",
-                    "left": "${@viewportProfile == @hubRoundSmall ? '30vw' : '2vw'}",
+                    "width": "${@viewportProfile == @hubRoundSmall ? '40vw' : '25vw'}",
+                    "height": "${@viewportProfile == @hubRoundSmall ? '40vh' : '35vh'}",
+                    "top": "${@viewportProfile == @hubRoundSmall ? '0vh' : '1vh'}",
+                    "left": "${@viewportProfile == @hubRoundSmall ? '30vw' : '1vw'}",
                     "direction": "row",
                     "items": [
                         {
@@ -572,8 +574,8 @@
                                     "type": "Frame",
                                     "width": "${@viewportProfile == @hubLandscapeSmall ? '20vw' : '16vw'}",
                                     "height": "${@viewportProfile == @hubLandscapeSmall ? '14vh' : '8vh'}",
-                                    "backgroundColor": "#202F58",
-                                    "borderColor": "white",
+                                    "backgroundColor": "@btnBgColor",
+                                    "borderColor": "@colorWhite",
                                     "borderWidth": 1.5,
                                     "borderRadius": "${@viewportProfile == @hubLandscapeSmall ? '100' : '50'}",
                                     "item": [
@@ -628,7 +630,7 @@
                                     "type": "Frame",
                                     "width": "35vw",
                                     "height": "8vh",
-                                    "backgroundColor": "#202F58",
+                                    "backgroundColor": "@btnBgColor",
                                     "borderColor": "white",
                                     "borderWidth": 1.5,
                                     "borderRadius": "300px",
