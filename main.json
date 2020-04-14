@@ -11,6 +11,10 @@
         {
             "name": "alexa-viewport-profiles",
             "version": "1.1.0"
+        },
+        {
+            "name": "alexa-styles",
+            "version": "1.1.0"
         }
     ],
     "resources": [
@@ -39,7 +43,13 @@
                 "textSizeTertiary-small": 20,
                 "textSizeDetails": 20,
                 "textSizeSecondaryHint": 25,
-                "videoCardTextSize": 13
+                "videoCardTextSize": 13,
+                "fontSizeXSmall-spot21": 21,
+                "fontSizeSubTitle": 15,
+                "fontSizeSubTitle-hubLandscapeSmall": 20,
+                "fontSizeSubTitle-hubLandscapeMedium": 20,
+                "fontSizeSubTitle-hubLandscapeLarge": 26,
+                "fontSizeSubTitle-tvLandscapeXLarge": 30
             }
         },
         {
@@ -52,7 +62,7 @@
             }
         },
         {
-            "when": "${@viewportProfiles == hubRoundSmall}",
+            "when": "${@viewportProfile == @hubRoundSmall}",
             "resources": [
                 {
                     "description": "Echo Spot Resources",
@@ -79,12 +89,39 @@
                 }
             ]
         },
-        "titleText": {
+        "baseTitleText": {
             "values": {
-                "color": "@colorTextPrimary",
-                "fontWeight": "400",
-                "fontSize": "@textSizePrimary"
+                "color": "@colorWhite",
+                "fontFamily": "@fontFamilyRomanSans",
+                "width": "100%",
+                "textAlign": "left",
+                "maxLines": 2
             }
+        },
+        "titleText": {
+            "extends": "baseTitleText",
+            "values": [
+                {
+                    "when": "${@viewportProfile == @hubRoundSmall}",
+                    "fontWeight": "@fontWeightRegular",
+                    "fontSize": "@fontSizeXSmall-spot21"
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium}",
+                    "fontWeight": "@fontWeightMedium",
+                    "fontSize": "@fontSizeSmall"
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeLarge}",
+                    "fontWeight": "@fontWeightMedium",
+                    "fontSize": "@fontSizeLarge"
+                },
+                {
+                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                    "fontWeight": "@fontWeightMedium",
+                    "fontSize": "@fontSizeXLarge"
+                }
+            ]
         },
         "backgroundBtm": {
             "values": {
@@ -107,22 +144,26 @@
                 }
             }
         },
-        "subTitlePrimary": {
+        "subTitle": {
             "values": {
-                "color": "@colorTextPrimary",
-                "fontWeight": "300",
-                "fontSize": "@textSizeSecondary",
+                "color": "@colorWhite",
+                "fontWeight": "@fontWeightLight",
                 "fontFamily": "helvetica",
                 "width": "100%",
                 "textAlign": "left",
-                "maxLines": 3
+                "fontSize": "${@viewportProfile == @hubLandscapeLarge ? '@fontSizeSubTitle-hubLandscapeLarge' : '@fontSizeSubTitle-hubLandscapeSmall'}",
+                "maxLines": 5
             }
         },
         "videoCardTitle": {
             "values": {
                 "color": "@colorTextPrimary",
-                "fontWeight": "200",
-                "fontSize": "@videoCardTextSize"
+                "fontWeight": "@fontWeightLight",
+                "fontSize": "@videoCardTextSize",
+                "textAlign": "left",
+                "textAlignVertical": "bottom",
+                "fontFamily": "helvetica",
+                "maxLines": 1
             }
         },
         "btnTitle": {
@@ -156,18 +197,6 @@
                         0.4
                     ]
                 }
-            }
-        },
-        "subTitlePrimarySmall": {
-            "description": "Echo Show 5 - sub title",
-            "values": {
-                "color": "@colorTextPrimary",
-                "fontWeight": "300",
-                "fontSize": "@textSizeSecondary-small",
-                "fontFamily": "helvetica",
-                "width": "100%",
-                "textAlign": "left",
-                "maxLines": 5
             }
         },
         "btnTitle-small": {
@@ -276,6 +305,67 @@
             ],
             "items": [
                 {
+                    "when": "${@viewportProfile == @hubRoundSmall}",
+                    "type": "Frame",
+                    "width": "30vw",
+                    "height": "30vw",
+                    "borderRadius": "15vw",
+                    "borderColor": "rgba(white,0.4)",
+                    "borderWidth": "2px",
+                    "left": "67vw",
+                    "top": "30vh",
+                    "item": {
+                        "type": "TouchWrapper",
+                        "onPress": [
+                            {
+                                "type": "cardDepressCmd",
+                                "cmdId": "touch-watch",
+                                "duration": 250
+                            },
+                            {
+                                "type": "SendEvent",
+                                "arguments": [
+                                    "videoCardPressed"
+                                ],
+                                "components": [
+                                    "videoCard-${ordinal}"
+                                ]
+                            }
+                        ],
+                        "id": "touch-watch",
+                        "width": "30vw",
+                        "height": "30vh",
+                        "paddingTop": "0vw",
+                        "item": {
+                            "type": "Container",
+                            "inheritParentState": true,
+                            "height": "100%",
+                            "width": "100%",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "inheritParentState": true,
+                                    "opacity": 1,
+                                    "width": "30vw",
+                                    "height": "30vh",
+                                    "source": "${smallRoundMenuOption}",
+                                    "scale": "best-fill",
+                                    "align": "center",
+                                    "position": "absolute",
+                                    "overlayColor": "rgba(black,0.2)"
+                                },
+                                {
+                                    "type": "Text",
+                                    "width": "30vw",
+                                    "height": "30vh",
+                                    "text": "videos",
+                                    "style": "circleCard-small"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
                     "when": "${@viewportProfile == @hubLandscapeSmall}",
                     "type": "Container",
                     "position": "absolute",
@@ -327,6 +417,8 @@
                                             "type": "Frame",
                                             "inheritParentState": true,
                                             "position": "absolute",
+                                            "borderColor": "rgba(white,0.4)",
+                                            "borderRadius": "8vw",
                                             "item": [
                                                 {
                                                     "type": "Container",
@@ -355,8 +447,7 @@
                                                         }
                                                     ]
                                                 }
-                                            ],
-                                            "borderRadius": "300px"
+                                            ]
                                         }
                                     ]
                                 }
@@ -372,39 +463,17 @@
             ],
             "items": [
                 {
-                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
                     "type": "Container",
                     "position": "absolute",
-                    "width": "20vw",
-                    "height": "30vh",
-                    "top": "3vh",
-                    "left": "2vw",
+                    "width": "${@viewportProfile == @hubRoundSmall ? '40vw' : '20vw'}",
+                    "height": "${@viewportProfile == @hubRoundSmall ? '40vh' : '30vh'}",
+                    "top": "${@viewportProfile == @hubRoundSmall ? '0vh' : '3vh'}",
+                    "left": "${@viewportProfile == @hubRoundSmall ? '30vw' : '2vw'}",
                     "direction": "row",
                     "items": [
                         {
                             "type": "Image",
                             "id": "logo1",
-                            "opacity": 1,
-                            "width": "100%",
-                            "height": "100%",
-                            "scale": "best-fit",
-                            "source": "${logoUrl}"
-                        }
-                    ]
-                },
-                {
-                    "when": "${@viewportProfiles == hubRoundSmall}",
-                    "type": "Container",
-                    "position": "absolute",
-                    "width": "40vw",
-                    "height": "40vh",
-                    "top": "0vh",
-                    "left": "30vw",
-                    "direction": "row",
-                    "items": [
-                        {
-                            "type": "Image",
-                            "id": "logo2",
                             "opacity": 1,
                             "width": "100%",
                             "height": "100%",
@@ -421,61 +490,17 @@
             ],
             "items": [
                 {
-                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
-                    "type": "Container",
-                    "description": "Container Title under the logo",
-                    "position": "absolute",
-                    "width": "50vw",
-                    "height": "40vh",
-                    "top": "30vh",
-                    "left": "5vw",
-                    "direction": "column",
-                    "items": [
-                        {
-                            "when": "${@viewportProfile == @hubLandscapeSmall}",
-                            "type": "Text",
-                            "color": "@colorTextPrimary",
-                            "fontWeight": "400",
-                            "fontSize": "@textSizePrimary-small",
-                            "fontFamily": "helvetica",
-                            "width": "100%",
-                            "textAlign": "left",
-                            "maxLines": 2,
-                            "text": "${titleText}"
-                        },
-                        {
-                            "when": "${@viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
-                            "type": "Text",
-                            "color": "@colorTextPrimary",
-                            "fontWeight": "400",
-                            "fontSize": "@textSizePrimary",
-                            "fontFamily": "helvetica",
-                            "width": "100%",
-                            "textAlign": "left",
-                            "maxLines": 2,
-                            "text": "${titleText}"
-                        }
-                    ]
-                },
-                {
-                    "when": "${@viewportProfiles == hubRoundSmall}",
                     "type": "Container",
                     "position": "absolute",
-                    "width": "70vw",
-                    "height": "40vh",
-                    "top": "75vh",
-                    "left": "15vw",
-                    "direction": "row",
+                    "width": "${@viewportProfile == @hubRoundSmall ? '70vw' : '50vw'}",
+                    "height": "20vh",
+                    "top": "${@viewportProfile == @hubRoundSmall ? '75vh' : '30vh'}",
+                    "left": "${@viewportProfile == @hubRoundSmall ? '15vw' : '5vw'}",
+                    "direction": "${@viewportProfile == @hubRoundSmall ? 'row' : 'column'}",
                     "items": [
                         {
                             "type": "Text",
-                            "color": "white",
-                            "fontWeight": "400",
-                            "fontSize": 20,
-                            "fontFamily": "helvetica",
-                            "textAlign": "center",
-                            "width": "100%",
-                            "maxLines": 1,
+                            "style": "titleText",
                             "text": "${titleText}"
                         }
                     ]
@@ -488,37 +513,18 @@
             ],
             "items": [
                 {
-                    "when": "${@viewportProfile == @hubLandscapeSmall}",
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
                     "type": "Container",
-                    "description": "Container for subtitle text",
                     "position": "absolute",
                     "width": "45vw",
-                    "height": "40vh",
-                    "top": "40vh",
+                    "height": "${@viewportProfile == @hubLandscapeSmall ? '45vh' : '15vh'}",
+                    "top": "${@viewportProfile == @hubLandscapeSmall ? '40vh' : '37vh'}",
                     "left": "5vw",
                     "direction": "column",
                     "items": [
                         {
                             "type": "Text",
-                            "style": "subTitlePrimarySmall",
-                            "text": "${subTitleText}"
-                        }
-                    ]
-                },
-                {
-                    "when": "${@viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
-                    "type": "Container",
-                    "description": "Container for subtitle text",
-                    "position": "absolute",
-                    "width": "45vw",
-                    "height": "15vh",
-                    "top": "37vh",
-                    "left": "5vw",
-                    "direction": "column",
-                    "items": [
-                        {
-                            "type": "Text",
-                            "style": "subTitlePrimary",
+                            "style": "subTitle",
                             "text": "${subTitleText}"
                         }
                     ]
@@ -531,7 +537,7 @@
             ],
             "items": [
                 {
-                    "when": "${@viewportProfile == @hubLandscapeSmall}",
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
                     "type": "TouchWrapper",
                     "onPress": [
                         {
@@ -549,91 +555,36 @@
                     "id": "btnTouch",
                     "width": "16vw",
                     "height": "8vh",
-                    "top": "63vh",
+                    "top": "${@viewportProfile == @hubLandscapeSmall ? '63vh' : '55vh'}",
                     "left": "5vw",
                     "item": [
                         {
                             "type": "Container",
                             "description": "Container for watch now button",
                             "position": "absolute",
-                            "width": "20vw",
-                            "height": "14vh",
+                            "width": "${@viewportProfile == @hubLandscapeSmall ? '20vw' : '16vw'}",
+                            "height": "${@viewportProfile == @hubLandscapeSmall ? '14vh' : '8vh'}",
                             "top": "50vh",
                             "left": "5vw",
                             "direction": "row",
                             "items": [
                                 {
                                     "type": "Frame",
-                                    "width": "20vw",
-                                    "height": "14vh",
+                                    "width": "${@viewportProfile == @hubLandscapeSmall ? '20vw' : '16vw'}",
+                                    "height": "${@viewportProfile == @hubLandscapeSmall ? '14vh' : '8vh'}",
                                     "backgroundColor": "#202F58",
                                     "borderColor": "white",
                                     "borderWidth": 1.5,
-                                    "borderRadius": "100",
-                                    "item": [
-                                        {
-                                            "type": "Text",
-                                            "style": "btnTitle-small",
-                                            "width": "19vw",
-                                            "height": "13vh",
-                                            "textAlign": "center",
-                                            "text": "${pBtnText}"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "when": "${@viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
-                    "type": "TouchWrapper",
-                    "onPress": [
-                        {
-                            "type": "cardDepressCmd",
-                            "cmdId": "btnTouch",
-                            "duration": 250
-                        },
-                        {
-                            "type": "SendEvent",
-                            "arguments": [
-                                "watchNowBtnPressed"
-                            ]
-                        }
-                    ],
-                    "id": "btnTouch",
-                    "width": "16vw",
-                    "height": "8vh",
-                    "top": "50vh",
-                    "left": "5vw",
-                    "item": [
-                        {
-                            "type": "Container",
-                            "description": "Container for watch now button",
-                            "position": "absolute",
-                            "width": "16vw",
-                            "height": "8vh",
-                            "top": "50vh",
-                            "left": "5vw",
-                            "direction": "row",
-                            "items": [
-                                {
-                                    "type": "Frame",
-                                    "width": "16vw",
-                                    "height": "8vh",
-                                    "backgroundColor": "#202F58",
-                                    "borderColor": "white",
-                                    "borderWidth": 1.5,
-                                    "borderRadius": "50",
+                                    "borderRadius": "${@viewportProfile == @hubLandscapeSmall ? '100' : '50'}",
                                     "item": [
                                         {
                                             "type": "Text",
                                             "style": "btnTitle",
-                                            "width": "15vw",
-                                            "height": "7vh",
+                                            "width": "${@viewportProfile == @hubLandscapeSmall ? '19vw' : '15vw'}",
+                                            "height": "${@viewportProfile == @hubLandscapeSmall ? '13vh' : '7vh'}",
                                             "textAlignVertical": "center",
                                             "text": "${pBtnText}",
-                                            "lineHeight": 2
+                                            "lineHeight": "${@viewportProfile == @hubLandscapeSmall ? '' : '2'}"
                                         }
                                     ]
                                 }
@@ -642,7 +593,7 @@
                     ]
                 },
                 {
-                    "when": "${@viewportProfiles == hubRoundSmall}",
+                    "when": "${@viewportProfile == @hubRoundSmall}",
                     "type": "TouchWrapper",
                     "onPress": [
                         {
@@ -707,7 +658,7 @@
             "items": [
                 {
                     "type": "Container",
-                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                    "when": "${@viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
                     "width": "100vw",
                     "height": "35vh",
                     "paddingTop": "5",
@@ -790,14 +741,10 @@
                                             "style": "videoCardTitle",
                                             "width": "10vw",
                                             "height": "3vh",
-                                            "position": "relative",
-                                            "textAlign": "left",
-                                            "textAlignVertical": "bottom",
-                                            "fontFamily": "helvetica",
-                                            "maxLines": 1,
-                                            "text": "${data.humanLabel.value}",
                                             "left": "1vw",
-                                            "top": "25vh"
+                                            "top": "25vh",
+                                            "position": "relative",
+                                            "text": "${data.humanLabel.value}"
                                         }
                                     ]
                                 }
@@ -839,7 +786,7 @@
                     }
                 },
                 {
-                    "when": "${@viewportProfiles == hubRoundSmall}",
+                    "when": "${@viewportProfile == @hubRoundSmall}",
                     "type": "Image",
                     "source": "${bgImgRound}",
                     "position": "absolute",
@@ -931,7 +878,7 @@
                 "pWatchNowBtn",
                 "list",
                 "downArrow",
-                "smallRoundMenuOption"
+                "pSmallRoundMenuOption"
             ],
             "items": [
                 {
@@ -940,35 +887,43 @@
                     "width": "100vw",
                     "items": [
                         {
+                            "description": "Background with left gradient",
                             "type": "backgroundLeftLayout",
                             "bgImg": "${pBackgroundImage}",
                             "bgImgRound": "${pBackgroundImageRound}"
                         },
                         {
+                            "description": "Background with bottom gradient",
                             "type": "backgrounBtmLayout",
                             "bgImgTransparent": "${pTransparentBg}"
                         },
                         {
+                            "description": "Logo",
                             "type": "logoLayout",
                             "logoUrl": "${pLogoImage}"
                         },
                         {
+                            "description": "Title text",
                             "type": "titleTextLayout",
                             "titleText": "${pTitleText}"
                         },
                         {
+                            "description": "Subtitle multi line text",
                             "type": "subTitleTextLayout",
                             "subTitleText": "${pSubTitleText}"
                         },
                         {
+                            "description": "CTA Watch Now button",
                             "type": "watchNowBtnLayout",
                             "pBtnText": "▶   WATCH NOW  "
                         },
                         {
+                            "description": "Cards layout",
                             "type": "videoCardsLayout",
                             "list": "${list}"
                         },
                         {
+                            "description": "Circlular cards layout",
                             "type": "cardCircleLayout",
                             "paddingTop": 2,
                             "paddingLeft": 2,
@@ -980,69 +935,9 @@
                             "smallRoundMenuOption": "${pSmallRoundMenuOption}"
                         },
                         {
+                            "description": "Down arrow under the circluar cards",
                             "type": "downArrowLayout",
                             "downArrowImg": "${downArrow}"
-                        },
-                        {
-                            "type": "Frame",
-                            "width": "30vw",
-                            "height": "15vw",
-                            "borderRadius": "2vw",
-                            "borderColor": "rgba(white,0.4)",
-                            "borderWidth": "2px",
-                            "left": "67vw",
-                            "top": "35vh",
-                            "item":{
-                                "type": "TouchWrapper",
-                                "onPress": [
-                                    {
-                                        "type": "cardDepressCmd",
-                                        "cmdId": "touch-watch",
-                                        "duration": 250
-                                    },
-                                    {
-                                        "type": "SendEvent",
-                                        "arguments": [
-                                            "videoCardPressed"
-                                        ],
-                                        "components": [
-                                            "videoCard-${ordinal}"
-                                        ]
-                                    }
-                                ],
-                                "id": "touch-watch",
-                                "width": "30vw",
-                                "height": "30vh",
-                                "paddingTop": "0vw",
-                                "item": {
-                                    "type": "Container",
-                                    "inheritParentState": true,
-                                    "height": "100%",
-                                    "width": "100%",
-                                    "items": [
-                                        {
-                                            "type": "Image",
-                                            "inheritParentState": true,
-                                            "opacity": 1,
-                                            "width": "30vw",
-                                            "height": "30vh",
-                                            "source": "${smallRoundMenuOption}",
-                                            "scale": "best-fill",
-                                            "align": "center",
-                                            "position": "absolute",
-                                            "overlayColor": "rgba(black,0.2)"
-                                        },
-                                        {
-                                            "type": "Text",
-                                            "width": "30vw",
-                                            "height": "25vh",
-                                            "text": "videos",
-                                            "style": "circleCard-small"
-                                        }
-                                    ]
-                                    
-                                }
-                            }
                         }
                     ]
                 }
@@ -1065,7 +960,7 @@
                 "pWatchNowBtn": "${payload.currentView.properties.watchNowBtn}",
                 "list": "${payload.currentView.videoCards}",
                 "downArrow": "${payload.currentView.properties.downArrow}",
-                "smallRoundMenuOption": "${payload.currentView.properties.smallRoundMenuOption}"
+                "pSmallRoundMenuOption": "${payload.currentView.properties.smallRoundMenuOption}"
             }
         ]
     }
