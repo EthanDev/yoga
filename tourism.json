@@ -251,9 +251,10 @@
                                             "subTitle": "${data.subTitle}",
                                             "bgImage": "${data.bgImage}",
                                             "width": "30",
-                                            "height": "29"
+                                            "height": "30"
                                         }
-                                    ]
+                                    ],
+                                    "spacing": "3vh"
                                 }
                             ]
                         }
