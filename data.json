@@ -3,10 +3,10 @@
         "type": "object",
         "properties": {
             "backgroundImage": "https://res.cloudinary.com/snapitdirect/image/upload/v1586071803/APL/bg1.png",
-            "backgroundImageSmall":"https://res.cloudinary.com/snapitdirect/image/upload/v1586780319/APL/spot_image.png",
+            "backgroundImageSmall": "https://res.cloudinary.com/snapitdirect/image/upload/v1586780319/APL/spot_image.png",
             "logoImage": "https://res.cloudinary.com/snapitdirect/image/upload/v1585944136/APL/Yoga.png",
             "titleText": "Yoga in the comfort of your home",
-            "subTitleText": "Expand, your mind, nuture your body, and elevate your soul with my handpicked collection of mediations, yoga practices and lifestyle videos.",
+            "subTitleText": "Expand, your mind, nuture your body, and elevate your soul with my handpicked collection of yoga practices and lifestyle videos.",
             "watchNowBtn": "https://res.cloudinary.com/snapitdirect/image/upload/v1585949903/APL/Watch_Now.png",
             "transparentBg": "https://res.cloudinary.com/snapitdirect/image/upload/v1586163992/APL/blank.png",
             "downArrow": "https://res.cloudinary.com/snapitdirect/image/upload/v1586544452/APL/down-arrow.png",
@@ -22,7 +22,10 @@
                     "xml:lang": "en",
                     "type": "literal",
                     "value": "Posture"
-                }
+                },
+                "imageShowProgressBar": true,
+                "imageProgressBarPercentage": 50
+                
             },
             {
                 "picture": {
@@ -33,7 +36,9 @@
                     "xml:lang": "en",
                     "type": "literal",
                     "value": "Stretches"
-                }
+                },
+                "imageShowProgressBar": true,
+                "imageProgressBarPercentage": 90
             },
             {
                 "picture": {
@@ -44,7 +49,10 @@
                     "xml:lang": "en",
                     "type": "literal",
                     "value": "Grounding"
-                }
+                },
+                "imageShowProgressBar": true,
+                "imageProgressBarPercentage": 30
+                
             },
             {
                 "picture": {
@@ -55,7 +63,9 @@
                     "xml:lang": "en",
                     "type": "literal",
                     "value": "Relax"
-                }
+                },
+                "imageShowProgressBar": true,
+                "imageProgressBarPercentage": 30
             },
             {
                 "picture": {
@@ -66,7 +76,9 @@
                     "xml:lang": "en",
                     "type": "literal",
                     "value": "Balance"
-                }
+                },
+                "imageShowProgressBar": true,
+                "imageProgressBarPercentage": 30
             },
             {
                 "picture": {
@@ -77,7 +89,22 @@
                     "xml:lang": "en",
                     "type": "literal",
                     "value": "Calm"
-                }
+                },
+                "imageShowProgressBar": true,
+                "imageProgressBarPercentage": 30
+            },
+            {
+                "picture": {
+                    "type": "uri",
+                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162734/APL/video_cards/69684302_10156165342662504_7473608648296497152_o.jpg"
+                },
+                "humanLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Calm"
+                },
+                "imageShowProgressBar": true,
+                "imageProgressBarPercentage": 30
             }
         ]
     }

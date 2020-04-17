@@ -1,0 +1,519 @@
+{
+    "type": "APL",
+    "version": "1.1",
+    "settings": {},
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-styles",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "Stock color for the light theme",
+            "colors": {
+                "colorTextPrimary": "#ffffff",
+                "btnBgColor": "#0F4B7E"
+            }
+        },
+        {
+            "description": "Stock color for the dark theme",
+            "when": "${viewport.theme == 'dark'}",
+            "colors": {
+                "colorTextPrimary": "#ffffff",
+                "btnBgColor": "#0F4B7E"
+            }
+        },
+        {
+            "description": "Standard font sizes",
+            "dimensions": {
+                "textSizeBody": 48,
+                "textSizePrimary": 20,
+                "textSizePrimary-small": 30,
+                "textSizeSecondary": 15,
+                "textSizeSecondary-small": 20,
+                "textSizeTertiary": 18,
+                "textSizeTertiary-small": 20,
+                "textSizeDetails": 20,
+                "textSizeSecondaryHint": 25,
+                "videoCardTextSize": 13,
+                "fontSizeXSmall-spot21": 21,
+                "fontSizeSubTitle": 15,
+                "fontSizeSubTitle-hubLandscapeSmall": 20,
+                "fontSizeSubTitle-hubLandscapeMedium": 20,
+                "fontSizeSubTitle-hubLandscapeLarge": 26,
+                "fontSizeSubTitle-tvLandscapeXLarge": 30
+            }
+        }
+    ],
+    "styles": {
+        "baseTitleText": {
+            "values": [
+                {
+                    "fontFamily": "@fontFamilyRomanSans",
+                    "color": "${viewport.theme == 'dark' ? '@colorWhite' : '@colorBlack' }",
+                    "fontWeight": "@fontWeightMedium",
+                    "width": "100%",
+                    "textAlign": "left",
+                    "maxLines": 2
+                }
+            ]
+        },
+        "title": {
+            "extends": "baseTileText",
+            "values": [
+                {
+                    "when": "${@viewportProfile == @hubRoundSmall}",
+                    "fontWeight": "@fontWeightRegular",
+                    "fontSize": "@fontSizeXSmall-spot21"
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium}",
+                    "fontWeight": "@fontWeightMedium",
+                    "fontSize": "@fontSizeLarge"
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeLarge}",
+                    "fontWeight": "@fontWeightMedium",
+                    "fontSize": "@fontSizeXLarge"
+                },
+                {
+                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                    "fontWeight": "@fontWeightMedium",
+                    "fontSize": "@fontSize3XLarge"
+                }
+            ]
+        },
+        "btnTitle": {
+            "description": "btn title",
+            "values": {
+                "color": "@colorWhite",
+                "fontFamily": "helvetica",
+                "fontWeight": "@fontWeightMedium",
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "fontSize": "@textSizeTertiary"
+            }
+        }
+    },
+    "onMount": [],
+    "graphics": {},
+    "commands": {
+        "cardDepressCmd": {
+            "parameters": [
+                "cmdId",
+                "duration"
+            ],
+            "description": "When a video card is pressed",
+            "commands": [
+                {
+                    "componentId": "${cmdId}",
+                    "duration": "${duration}",
+                    "easing": "ease-in-out",
+                    "type": "AnimateItem",
+                    "value": [
+                        {
+                            "property": "transform",
+                            "from": [
+                                {
+                                    "scale": 1
+                                }
+                            ],
+                            "to": [
+                                {
+                                    "scale": 0.95
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "componentId": "${cmdId}",
+                    "duration": "${duration}",
+                    "easing": "ease-in-out",
+                    "type": "AnimateItem",
+                    "value": [
+                        {
+                            "property": "transform",
+                            "from": [
+                                {
+                                    "scale": 0.95
+                                }
+                            ],
+                            "to": [
+                                {
+                                    "scale": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "layouts": {
+        "itemCard": {
+            "parameters": [
+                "title",
+                "subTitle",
+                "bgImage",
+                "width",
+                "height"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "description": "Container for item components",
+                    "width": "${width}vw",
+                    "height": "${height}vh",
+                    "alignItems": "center",
+                    "direction": "row",
+                    "items": [
+                        {
+                            "type": "Frame",
+                            "borderRadius": 10,
+                            "item":[
+                                {
+                                    "type": "Image",
+                                    "width": "${width}vw",
+                                    "height": "${height}vh",
+                                    "source": "${bgImage}",
+                                    "position": "absolute",
+                                    "scale": "best-fill",
+                                    "opacity": 1,
+                                    "overlayGradient": {
+                                        "type": "linear",
+                                        "angle": 180,
+                                        "colorRange": [
+                                            "black",
+                                            "transparent"
+                                        ],
+                                        "inputRange": [
+                                            0,
+                                            0.2
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "itemCardsLayout": {
+            "parameters": [
+                "dataList"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "width": "30vw",
+                    "height": "87vh",
+                    "position": "absolute",
+                    "left": "68vw",
+                    "top": "10vh",
+                    "direction": "column",
+                    "items": [
+                        {
+                            "type": "Sequence",
+                            "width": "30vw",
+                            "height": "990vh",
+                            "data": "${dataList}",
+                            "numbered": true,
+                            "scrollDirection": "vertical",
+                            "item": [
+                                {
+                                    "type": "TouchWrapper",
+                                    "onPress": [
+                                        {
+                                            "type": "cardDepressCmd",
+                                            "cmdId": "touch-${ordinal}",
+                                            "duration": 250
+                                        },
+                                        {
+                                            "type": "SendEvent",
+                                            "arguments": [
+                                                "itemCardPressed"
+                                            ],
+                                            "components": [
+                                                "itemCard-${ordinal}"
+                                            ]
+                                        }
+                                    ],
+                                    "id": "touch-${ordinal}",
+                                    "width": "30vw",
+                                    "height": "30vh",
+                                    "item": [
+                                        {
+                                            "type": "itemCard",
+                                            "title": "${data.title}",
+                                            "subTitle": "${data.subTitle}",
+                                            "bgImage": "${data.bgImage}",
+                                            "width": "30",
+                                            "height": "29"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "backgroundLayout": {
+            "parameters": [
+                "bgImg"
+            ],
+            "items": [
+                {
+                    "type": "Image",
+                    "opacity": 1,
+                    "width": "100vw",
+                    "height": "100vh",
+                    "source": "${bgImg}",
+                    "scale": "best-fill",
+                    "position": "absolute",
+                    "overlayColor": "rgba(black,0.2)",
+                    "overlayGradient": {
+                        "type": "linear",
+                        "angle": 90,
+                        "colorRange": [
+                            "black",
+                            "transparent"
+                        ],
+                        "inputRange": [
+                            0,
+                            0.3
+                        ]
+                    }
+                }
+            ]
+        },
+        "logoLayout": {
+            "parameters": [
+                "logoUrl"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "description": "Container for the logo",
+                    "position": "absolute",
+                    "width": "20vw",
+                    "height": "15vh",
+                    "top": "1vh",
+                    "left": "5vw",
+                    "direction": "row",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "opacity": 1,
+                            "width": "100%",
+                            "height": "100%",
+                            "source": "${logoUrl}",
+                            "scale": "best-fit"
+                        }
+                    ]
+                }
+            ]
+        },
+        "mainTitle": {
+            "parameters": [
+                "titleText"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "position": "absolute",
+                    "width": "40vw",
+                    "height": "25vh",
+                    "top": "30vh",
+                    "left": "5vw",
+                    "direction": "row",
+                    "items": [
+                        {
+                            "type": "Text",
+                            "style": "title",
+                            "text": "${titleText}"
+                        }
+                    ]
+                }
+            ]
+        },
+        "exploreMoreBtn": {
+            "parameters": [
+                "pBtnText"
+            ],
+            "items": [
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "type": "TouchWrapper",
+                    "onPress": [
+                        {
+                            "type": "cardDepressCmd",
+                            "cmdId": "btnTouch",
+                            "duration": 250
+                        },
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "watchNowBtnPressed"
+                            ]
+                        }
+                    ],
+                    "id": "btnTouch",
+                    "width": "16vw",
+                    "height": "8vh",
+                    "top": "${@viewportProfile == @hubLandscapeSmall ? '63vh' : '60vh'}",
+                    "left": "5vw",
+                    "item": [
+                        {
+                            "type": "Container",
+                            "description": "Container for watch now button",
+                            "position": "absolute",
+                            "width": "${@viewportProfile == @hubLandscapeSmall ? '20vw' : '16vw'}",
+                            "height": "${@viewportProfile == @hubLandscapeSmall ? '14vh' : '8vh'}",
+                            "top": "60vh",
+                            "left": "5vw",
+                            "direction": "row",
+                            "items": [
+                                {
+                                    "type": "Frame",
+                                    "width": "${@viewportProfile == @hubLandscapeSmall ? '20vw' : '16vw'}",
+                                    "height": "${@viewportProfile == @hubLandscapeSmall ? '14vh' : '8vh'}",
+                                    "backgroundColor": "@btnBgColor",
+                                    "borderColor": "@colorWhite",
+                                    "borderWidth": 0,
+                                    "paddingLeft": "0.5vw",
+                                    "borderRadius": "${@viewportProfile == @hubLandscapeSmall ? '100' : '50'}",
+                                    "item": [
+                                        {
+                                            "type": "Text",
+                                            "style": "btnTitle",
+                                            "width": "${@viewportProfile == @hubLandscapeSmall ? '19vw' : '15vw'}",
+                                            "height": "${@viewportProfile == @hubLandscapeSmall ? '13vh' : '7vh'}",
+                                            "textAlignVertical": "center",
+                                            "text": "${pBtnText}",
+                                            "lineHeight": "${@viewportProfile == @hubLandscapeSmall ? '' : '2.5'}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "when": "${@viewportProfile == @hubRoundSmall}",
+                    "type": "TouchWrapper",
+                    "onPress": [
+                        {
+                            "type": "cardDepressCmd",
+                            "cmdId": "btnTouch",
+                            "duration": 250
+                        },
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "watchNowBtnPressed"
+                            ]
+                        }
+                    ],
+                    "id": "btnTouch",
+                    "width": "20vw",
+                    "height": "8vh",
+                    "top": "85vh",
+                    "left": "32vw",
+                    "item": [
+                        {
+                            "type": "Container",
+                            "description": "Container for watch now button",
+                            "position": "absolute",
+                            "width": "35vw",
+                            "height": "8vh",
+                            "top": "50vh",
+                            "left": "5vw",
+                            "direction": "row",
+                            "items": [
+                                {
+                                    "type": "Frame",
+                                    "width": "35vw",
+                                    "height": "8vh",
+                                    "backgroundColor": "@btnBgColor",
+                                    "borderColor": "white",
+                                    "borderWidth": 1.5,
+                                    "borderRadius": "300px",
+                                    "item": [
+                                        {
+                                            "type": "Text",
+                                            "style": "btnTitle",
+                                            "width": "35vw",
+                                            "height": "7vh",
+                                            "textAlign": "center",
+                                            "textAlignVertical": "center",
+                                            "text": "${pBtnText}",
+                                            "lineHeight": 1
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "mainLayout": {
+            "parameters": [
+                "pBackgroundImage",
+                "transparentBtmBg",
+                "pLogoImage",
+                "pMainTitle",
+                "dataList"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "height": "100vh",
+                    "width": "100vw",
+                    "items": [
+                        {
+                            "type": "backgroundLayout",
+                            "bgImg": "${pBackgroundImage}"
+                        },
+                        {
+                            "type": "logoLayout",
+                            "logoUrl": "${pLogoImage}"
+                        },
+                        {
+                            "type": "mainTitle",
+                            "titleText": "${pMainTitle}"
+                        },
+                        {
+                            "description": "CTA Watch Now button",
+                            "type": "exploreMoreBtn",
+                            "pBtnText": "▶   WATCH NOW  "
+                        },
+                        {
+                            "description": "Cards carousel",
+                            "type": "itemCardsLayout",
+                            "dataList": "${dataList}"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "type": "mainLayout",
+                "pBackgroundImage": "${payload.currentView.properties.backgroundImage}",
+                "pLogoImage": "${payload.currentView.properties.logoImage}",
+                "pMainTitle": "${payload.currentView.properties.mainTitle}",
+                "dataList": "${payload.currentView.itemCards}"
+            }
+        ]
+    }
+}

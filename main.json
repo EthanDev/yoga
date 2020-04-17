@@ -1,110 +1,991 @@
 {
-    "currentView": {
-        "type": "object",
-        "properties": {
-            "backgroundImage": "https://res.cloudinary.com/snapitdirect/image/upload/v1586071803/APL/bg1.png",
-            "backgroundImageSmall": "https://res.cloudinary.com/snapitdirect/image/upload/v1586780319/APL/spot_image.png",
-            "logoImage": "https://res.cloudinary.com/snapitdirect/image/upload/v1585944136/APL/Yoga.png",
-            "titleText": "Yoga in the comfort of your home",
-            "subTitleText": "Expand, your mind, nuture your body, and elevate your soul with my handpicked collection of yoga practices and lifestyle videos.",
-            "watchNowBtn": "https://res.cloudinary.com/snapitdirect/image/upload/v1585949903/APL/Watch_Now.png",
-            "transparentBg": "https://res.cloudinary.com/snapitdirect/image/upload/v1586163992/APL/blank.png",
-            "downArrow": "https://res.cloudinary.com/snapitdirect/image/upload/v1586544452/APL/down-arrow.png",
-            "smallRoundMenuOption": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162733/APL/video_cards/81529502_2518295991745195_1959358973822646634_n.jpg"
+    "type": "APL",
+    "version": "1.3",
+    "settings": {},
+    "theme": "light",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.1.0"
         },
-        "videoCards": [
+        {
+            "name": "alexa-viewport-profiles",
+            "version": "1.1.0"
+        },
+        {
+            "name": "alexa-styles",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "Stock color for the light theme",
+            "colors": {
+                "colorTextPrimary": "#ffffff",
+                "btnBgColor": "#202F58"
+            }
+        },
+        {
+            "description": "Stock color for the dark theme",
+            "when": "${viewport.theme == 'dark'}",
+            "colors": {
+                "colorTextPrimary": "#ffffff",
+                "btnBgColor": "#202F58"
+            }
+        },
+        {
+            "description": "Standard font sizes",
+            "dimensions": {
+                "textSizeBody": 48,
+                "textSizePrimary": 20,
+                "textSizePrimary-small": 30,
+                "textSizeSecondary": 15,
+                "textSizeSecondary-small": 20,
+                "textSizeTertiary": 18,
+                "textSizeTertiary-small": 20,
+                "textSizeDetails": 20,
+                "textSizeSecondaryHint": 25,
+                "videoCardTextSize": 13,
+                "fontSizeXSmall-spot21": 21,
+                "fontSizeSubTitle": 15,
+                "fontSizeSubTitle-hubLandscapeSmall": 20,
+                "fontSizeSubTitle-hubLandscapeMedium": 20,
+                "fontSizeSubTitle-hubLandscapeLarge": 26,
+                "fontSizeSubTitle-tvLandscapeXLarge": 30
+            }
+        },
+        {
+            "description": "Common margins and padding",
+            "dimensions": {
+                "marginTop": 40,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginBottom": 40
+            }
+        },
+        {
+            "when": "${@viewportProfile == @hubRoundSmall}",
+            "resources": [
+                {
+                    "description": "Echo Spot Resources",
+                    "dimensions": {
+                        "menuOptionWidth": 30
+                    }
+                }
+            ]
+        }
+    ],
+    "styles": {
+        "videoCardStyle": {
+            "values": [
+                {
+                    "when": "${state.focused}",
+                    "borderColor": "white",
+                    "opacity": "1",
+                    "borderRadius": "10"
+                },
+                {
+                    "when": "${!state.focused}",
+                    "borderColor": "",
+                    "borderRadius": "11"
+                }
+            ]
+        },
+        "baseTitleText": {
+            "values": {
+                "color": "@colorWhite",
+                "fontFamily": "@fontFamilyRomanSans",
+                "width": "100%",
+                "textAlign": "left",
+                "maxLines": 2
+            }
+        },
+        "titleText": {
+            "extends": "baseTitleText",
+            "values": [
+                {
+                    "when": "${@viewportProfile == @hubRoundSmall}",
+                    "fontWeight": "@fontWeightRegular",
+                    "fontSize": "@fontSizeXSmall-spot21"
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium}",
+                    "fontWeight": "@fontWeightMedium",
+                    "fontSize": "@fontSizeSmall"
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeLarge}",
+                    "fontWeight": "@fontWeightMedium",
+                    "fontSize": "@fontSizeLarge"
+                },
+                {
+                    "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                    "fontWeight": "@fontWeightMedium",
+                    "fontSize": "@fontSizeXLarge"
+                }
+            ]
+        },
+        "backgroundBtm": {
+            "values": {
+                "opacity": 1,
+                "width": "100vw",
+                "height": "100vh",
+                "scale": "best-fill",
+                "position": "absolute",
+                "overlayGradient": {
+                    "type": "linear",
+                    "angle": 360,
+                    "colorRange": [
+                        "black",
+                        "transparent"
+                    ],
+                    "inputRange": [
+                        0,
+                        0.1
+                    ]
+                }
+            }
+        },
+        "subTitle": {
+            "values": {
+                "color": "@colorWhite",
+                "fontWeight": "@fontWeightLight",
+                "fontFamily": "helvetica",
+                "width": "100%",
+                "textAlign": "left",
+                "fontSize": "${@viewportProfile == @hubLandscapeLarge ? '@fontSizeSubTitle-hubLandscapeLarge' : '@fontSizeSubTitle-hubLandscapeSmall'}",
+                "maxLines": 5
+            }
+        },
+        "videoCardTitle": {
+            "values": {
+                "color": "@colorTextPrimary",
+                "fontWeight": "@fontWeightLight",
+                "fontSize": "@videoCardTextSize",
+                "textAlign": "left",
+                "textAlignVertical": "bottom",
+                "fontFamily": "helvetica",
+                "maxLines": 1
+            }
+        },
+        "backgroundBtmSmall": {
+            "description": "Echo Show 5 -  Bottom gradient",
+            "values": {
+                "opacity": 1,
+                "width": "100vw",
+                "height": "100vh",
+                "scale": "best-fill",
+                "position": "absolute",
+                "overlayGradient": {
+                    "type": "linear",
+                    "angle": 360,
+                    "colorRange": [
+                        "black",
+                        "transparent"
+                    ],
+                    "inputRange": [
+                        0,
+                        0.4
+                    ]
+                }
+            }
+        },
+        "btnTitle": {
+            "description": "btn title",
+            "values": {
+                "color": "#EDE1CB",
+                "fontFamily": "helvetica",
+                "fontWeight": "@fontWeightMedium",
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "fontSize": "@textSizeTertiary"
+            }
+        },
+        "btnTitle-small": {
+            "description": "Echo Show 5 btn title",
+            "values": {
+                "color": "#EDE1CB",
+                "fontFamily": "helvetica",
+                "fontWeight": "700",
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "fontSize": "@textSizeTertiary-small"
+            }
+        },
+        "circleCardTextSmall": {
+            "description": "Echo Show 5 card style",
+            "values": {
+                "color": "white",
+                "fontWeight": "600",
+                "fontSize": "20",
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "fontFamily": "helvetica",
+                "maxLines": 1
+            }
+        }
+    },
+    "onMount": [],
+    "graphics": {},
+    "commands": {
+        "cmdHighlightVideoCard": {
+            "parameters": [
+                "pComponentId"
+            ],
+            "commands": [
+                {
+                    "type": "SetValue",
+                    "componentId": "${pComponentId}",
+                    "property": "borderColor",
+                    "value": "red"
+                }
+            ]
+        },
+        "cardDepressCmd": {
+            "parameters": [
+                "cmdId",
+                "duration"
+            ],
+            "description": "When a video card is pressed",
+            "commands": [
+                {
+                    "componentId": "${cmdId}",
+                    "duration": "${duration}",
+                    "easing": "ease-in-out",
+                    "type": "AnimateItem",
+                    "value": [
+                        {
+                            "property": "transform",
+                            "from": [
+                                {
+                                    "scale": 1
+                                }
+                            ],
+                            "to": [
+                                {
+                                    "scale": 0.95
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "componentId": "${cmdId}",
+                    "duration": "${duration}",
+                    "easing": "ease-in-out",
+                    "type": "AnimateItem",
+                    "value": [
+                        {
+                            "property": "transform",
+                            "from": [
+                                {
+                                    "scale": 0.95
+                                }
+                            ],
+                            "to": [
+                                {
+                                    "scale": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "layouts": {
+        "cardCircleLayout": {
+            "parameters": [
+                "paddingTop",
+                "paddingLeft",
+                "paddingRight",
+                "outerColour",
+                "innerColour",
+                "size",
+                "list",
+                "smallRoundMenuOption"
+            ],
+            "items": [
+                {
+                    "when": "${@viewportProfile == @hubRoundSmall}",
+                    "type": "Frame",
+                    "width": "30vw",
+                    "height": "30vw",
+                    "borderRadius": "15vw",
+                    "borderColor": "rgba(white,0.4)",
+                    "borderWidth": "2px",
+                    "left": "67vw",
+                    "top": "30vh",
+                    "item": [
+                        {
+                            "type": "TouchWrapper",
+                            "onPress": [
+                                {
+                                    "type": "cardDepressCmd",
+                                    "cmdId": "touch-watch",
+                                    "duration": 250
+                                },
+                                {
+                                    "type": "SendEvent",
+                                    "arguments": [
+                                        "videoCardPressed"
+                                    ],
+                                    "components": [
+                                        "videoCard-${ordinal}"
+                                    ]
+                                }
+                            ],
+                            "id": "touch-watch",
+                            "width": "30vw",
+                            "height": "30vh",
+                            "paddingTop": "0vw",
+                            "item": [
+                                {
+                                    "type": "Container",
+                                    "inheritParentState": true,
+                                    "height": "100%",
+                                    "width": "100%",
+                                    "items": [
+                                        {
+                                            "type": "Image",
+                                            "inheritParentState": true,
+                                            "opacity": 1,
+                                            "width": "30vw",
+                                            "height": "30vh",
+                                            "source": "${smallRoundMenuOption}",
+                                            "scale": "best-fill",
+                                            "align": "center",
+                                            "position": "absolute",
+                                            "overlayColor": "rgba(black,0.2)"
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "width": "30vw",
+                                            "height": "30vh",
+                                            "text": "videos",
+                                            "style": "circleCardTextSmall"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall}",
+                    "type": "Container",
+                    "position": "absolute",
+                    "left": "80vw",
+                    "top": "5vh",
+                    "width": "17vw",
+                    "height": "90vh",
+                    "direction": "column",
+                    "items": [
+                        {
+                            "type": "Sequence",
+                            "width": "17vw",
+                            "height": "90vh",
+                            "paddingLeft": "0",
+                            "paddingRight": "0",
+                            "data": "${list}",
+                            "numbered": true,
+                            "scrollDirection": "vertical",
+                            "item": [
+                                {
+                                    "type": "TouchWrapper",
+                                    "onPress": [
+                                        {
+                                            "type": "cardDepressCmd",
+                                            "cmdId": "touch-${ordinal}",
+                                            "duration": 250
+                                        },
+                                        {
+                                            "type": "SendEvent",
+                                            "arguments": [
+                                                "videoCardPressed"
+                                            ],
+                                            "components": [
+                                                "videoCard-${ordinal}"
+                                            ]
+                                        }
+                                    ],
+                                    "id": "touch-${ordinal}",
+                                    "width": "17vw",
+                                    "height": "30vh",
+                                    "paddingTop": "0vw",
+                                    "item": [
+                                        {
+                                            "type": "Container",
+                                            "inheritParentState": true,
+                                            "height": "100%",
+                                            "width": "100%",
+                                            "alignItems": "center",
+                                            "items": [
+                                                {
+                                                    "type": "Frame",
+                                                    "inheritParentState": true,
+                                                    "position": "absolute",
+                                                    "borderColor": "rgba(white,0.4)",
+                                                    "borderRadius": "8vw",
+                                                    "item": [
+                                                        {
+                                                            "type": "Container",
+                                                            "inheritParentState": true,
+                                                            "height": "100%",
+                                                            "width": "100%",
+                                                            "items": [
+                                                                {
+                                                                    "type": "Image",
+                                                                    "inheritParentState": true,
+                                                                    "opacity": 1,
+                                                                    "width": "14.4vw",
+                                                                    "height": "28.7vh",
+                                                                    "source": "${data.picture.value}",
+                                                                    "scale": "best-fill",
+                                                                    "align": "center",
+                                                                    "position": "absolute",
+                                                                    "overlayColor": "rgba(black,0.2)"
+                                                                },
+                                                                {
+                                                                    "type": "Text",
+                                                                    "width": "14.4vw",
+                                                                    "height": "28.7vh",
+                                                                    "text": "${data.humanLabel.value}",
+                                                                    "style": "circleCardTextSmall"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "logoLayout": {
+            "parameters": [
+                "logoUrl"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "position": "absolute",
+                    "width": "${@viewportProfile == @hubRoundSmall ? '40vw' : '25vw'}",
+                    "height": "${@viewportProfile == @hubRoundSmall ? '40vh' : '35vh'}",
+                    "top": "${@viewportProfile == @hubRoundSmall ? '0vh' : '1vh'}",
+                    "left": "${@viewportProfile == @hubRoundSmall ? '30vw' : '1vw'}",
+                    "direction": "row",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "id": "logo1",
+                            "opacity": 1,
+                            "width": "100%",
+                            "height": "100%",
+                            "scale": "best-fit",
+                            "source": "${logoUrl}"
+                        }
+                    ]
+                }
+            ]
+        },
+        "titleTextLayout": {
+            "parameters": [
+                "titleText"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "position": "absolute",
+                    "width": "${@viewportProfile == @hubRoundSmall ? '70vw' : '50vw'}",
+                    "height": "20vh",
+                    "top": "${@viewportProfile == @hubRoundSmall ? '75vh' : '30vh'}",
+                    "left": "${@viewportProfile == @hubRoundSmall ? '15vw' : '5vw'}",
+                    "direction": "${@viewportProfile == @hubRoundSmall ? 'row' : 'column'}",
+                    "items": [
+                        {
+                            "type": "Text",
+                            "style": "titleText",
+                            "text": "${titleText}"
+                        }
+                    ]
+                }
+            ]
+        },
+        "subTitleTextLayout": {
+            "parameters": [
+                "subTitleText"
+            ],
+            "items": [
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "type": "Container",
+                    "position": "absolute",
+                    "width": "45vw",
+                    "height": "${@viewportProfile == @hubLandscapeSmall ? '45vh' : '15vh'}",
+                    "top": "${@viewportProfile == @hubLandscapeSmall ? '40vh' : '37vh'}",
+                    "left": "5vw",
+                    "direction": "column",
+                    "items": [
+                        {
+                            "type": "Text",
+                            "style": "subTitle",
+                            "text": "${subTitleText}"
+                        }
+                    ]
+                }
+            ]
+        },
+        "watchNowBtnLayout": {
+            "parameters": [
+                "pBtnText"
+            ],
+            "items": [
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "type": "TouchWrapper",
+                    "onPress": [
+                        {
+                            "type": "cardDepressCmd",
+                            "cmdId": "btnTouch",
+                            "duration": 250
+                        },
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "watchNowBtnPressed"
+                            ]
+                        }
+                    ],
+                    "id": "btnTouch",
+                    "width": "16vw",
+                    "height": "8vh",
+                    "top": "${@viewportProfile == @hubLandscapeSmall ? '63vh' : '55vh'}",
+                    "left": "5vw",
+                    "item": [
+                        {
+                            "type": "Container",
+                            "description": "Container for watch now button",
+                            "position": "absolute",
+                            "width": "${@viewportProfile == @hubLandscapeSmall ? '20vw' : '16vw'}",
+                            "height": "${@viewportProfile == @hubLandscapeSmall ? '14vh' : '8vh'}",
+                            "top": "50vh",
+                            "left": "5vw",
+                            "direction": "row",
+                            "items": [
+                                {
+                                    "type": "Frame",
+                                    "width": "${@viewportProfile == @hubLandscapeSmall ? '20vw' : '16vw'}",
+                                    "height": "${@viewportProfile == @hubLandscapeSmall ? '14vh' : '8vh'}",
+                                    "backgroundColor": "@btnBgColor",
+                                    "borderColor": "@colorWhite",
+                                    "borderWidth": 1.5,
+                                    "borderRadius": "${@viewportProfile == @hubLandscapeSmall ? '100' : '50'}",
+                                    "item": [
+                                        {
+                                            "type": "Text",
+                                            "style": "btnTitle",
+                                            "width": "${@viewportProfile == @hubLandscapeSmall ? '19vw' : '15vw'}",
+                                            "height": "${@viewportProfile == @hubLandscapeSmall ? '13vh' : '7vh'}",
+                                            "textAlignVertical": "center",
+                                            "text": "${pBtnText}",
+                                            "lineHeight": "${@viewportProfile == @hubLandscapeSmall ? '' : '2'}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "when": "${@viewportProfile == @hubRoundSmall}",
+                    "type": "TouchWrapper",
+                    "onPress": [
+                        {
+                            "type": "cardDepressCmd",
+                            "cmdId": "btnTouch",
+                            "duration": 250
+                        },
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "watchNowBtnPressed"
+                            ]
+                        }
+                    ],
+                    "id": "btnTouch",
+                    "width": "20vw",
+                    "height": "8vh",
+                    "top": "85vh",
+                    "left": "32vw",
+                    "item": [
+                        {
+                            "type": "Container",
+                            "description": "Container for watch now button",
+                            "position": "absolute",
+                            "width": "35vw",
+                            "height": "8vh",
+                            "top": "50vh",
+                            "left": "5vw",
+                            "direction": "row",
+                            "items": [
+                                {
+                                    "type": "Frame",
+                                    "width": "35vw",
+                                    "height": "8vh",
+                                    "backgroundColor": "@btnBgColor",
+                                    "borderColor": "white",
+                                    "borderWidth": 1.5,
+                                    "borderRadius": "300px",
+                                    "item": [
+                                        {
+                                            "type": "Text",
+                                            "style": "btnTitle",
+                                            "width": "35vw",
+                                            "height": "7vh",
+                                            "textAlign": "center",
+                                            "textAlignVertical": "center",
+                                            "text": "${pBtnText}",
+                                            "lineHeight": 1
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "videoCardsLayout": {
+            "parameters": [
+                "list"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "when": "${@viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "width": "100vw",
+                    "height": "35vh",
+                    "paddingTop": "5",
+                    "direction": "row",
+                    "items": [
+                        {
+                            "type": "Sequence",
+                            "width": "100vw",
+                            "height": "40vh",
+                            "paddingLeft": "@marginLeft",
+                            "paddingRight": "@marginRight",
+                            "data": "${list}",
+                            "numbered": true,
+                            "scrollDirection": "horizontal",
+                            "item": [
+                                {
+                                    "type": "TouchWrapper",
+                                    "onPress": [
+                                        {
+                                            "type": "cardDepressCmd",
+                                            "cmdId": "touch-${ordinal}",
+                                            "duration": 250
+                                        },
+                                        {
+                                            "type": "SendEvent",
+                                            "arguments": [
+                                                "videoCardPressed"
+                                            ],
+                                            "components": [
+                                                "videoCard-${ordinal}"
+                                            ]
+                                        }
+                                    ],
+                                    "id": "touch-${ordinal}",
+                                    "width": "15vw",
+                                    "height": "30vh",
+                                    "paddingRight": "16vw",
+                                    "item": [
+                                        {
+                                            "type": "Frame",
+                                            "width": "15vw",
+                                            "height": "30vh",
+                                            "alignSelf": "center",
+                                            "position": "absolute",
+                                            "items": [
+                                                {
+                                                    "type": "Container",
+                                                    "width": "15vw",
+                                                    "height": "30vh",
+                                                    "direction": "row",
+                                                    "items": [
+                                                        {
+                                                            "type": "Image",
+                                                            "when": true,
+                                                            "width": "15vw",
+                                                            "height": "30vh",
+                                                            "source": "${data.picture.value}",
+                                                            "scale": "best-fill",
+                                                            "position": "absolute"
+                                                        },
+                                                        {
+                                                            "type": "Text",
+                                                            "style": "videoCardTitle",
+                                                            "width": "10vw",
+                                                            "height": "3vh",
+                                                            "left": "1vw",
+                                                            "textAlign": "left",
+                                                            "textAlignVertical": "center",
+                                                            "text": "${data.humanLabel.value}",
+                                                            "fontWeight": "bold",
+                                                            "top": "25vh"
+                                                           
+                                                        },
+                                                        {
+                                                            "when": "${data.imageShowProgressBar == true}",
+                                                            "type": "Frame",
+                                                            "width": "30vw",
+                                                            "height": "1vh",
+                                                            "alignSelf": "center",
+                                                            "position": "absolute",
+                                                            "items": [
+                                                                {
+                                                                    "type": "Frame",
+                                                                    "backgroundColor": "white",
+                                                                    "width": "${data.imageProgressBarPercentage / 2}%",
+                                                                    "height": "2vh"
+                                                                }
+                                                            ],
+                                                            "backgroundColor": "#5f615f",
+                                                            "borderRadius": "1vw",
+                                                            "top": "29vh",
+                                                            "opacity": 0.8
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "borderTopLeftRadius": "1vw",
+                                            "borderTopRightRadius": "1vw",
+                                            "borderBottomLeftRadius": "0.5vw",
+                                            "borderBottomRightRadius": "0.5vw",
+                                            "top": "30vh"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "position": "absolute",
+                    "left": "4vw",
+                    "top": "67vh"
+                }
+            ]
+        },
+        "backgroundLeftLayout": {
+            "parameters": [
+                "bgImg",
+                "bgImgRound"
+            ],
+            "items": [
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "type": "Image",
+                    "opacity": 1,
+                    "width": "100vw",
+                    "height": "100vh",
+                    "source": "${bgImg}",
+                    "scale": "best-fill",
+                    "position": "absolute",
+                    "overlayGradient": {
+                        "type": "linear",
+                        "angle": 90,
+                        "colorRange": [
+                            "black",
+                            "transparent"
+                        ],
+                        "inputRange": [
+                            0.2,
+                            0.5
+                        ]
+                    }
+                },
+                {
+                    "when": "${@viewportProfile == @hubRoundSmall}",
+                    "type": "Image",
+                    "source": "${bgImgRound}",
+                    "position": "absolute",
+                    "width": "100vw",
+                    "height": "100vh",
+                    "scale": "best-fill"
+                }
+            ]
+        },
+        "backgrounBtmLayout": {
+            "parameters": [
+                "bgImgTransparent"
+            ],
+            "items": [
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall}",
+                    "type": "Image",
+                    "opacity": 1,
+                    "width": "100vw",
+                    "height": "100vh",
+                    "source": "${bgImgTransparent}",
+                    "scale": "best-fill",
+                    "position": "absolute",
+                    "overlayGradient": {
+                        "type": "linear",
+                        "angle": 360,
+                        "colorRange": [
+                            "black",
+                            "transparent"
+                        ],
+                        "inputRange": [
+                            0,
+                            0.5
+                        ]
+                    }
+                },
+                {
+                    "when": "${@viewportProfile == @hubLandscapeMedium ||@viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                    "type": "Image",
+                    "opacity": 1,
+                    "width": "100vw",
+                    "height": "100vh",
+                    "source": "${bgImgTransparent}",
+                    "scale": "best-fill",
+                    "position": "absolute",
+                    "overlayGradient": {
+                        "type": "linear",
+                        "angle": 360,
+                        "colorRange": [
+                            "black",
+                            "transparent"
+                        ],
+                        "inputRange": [
+                            0,
+                            0.1
+                        ]
+                    }
+                }
+            ]
+        },
+        "downArrowLayout": {
+            "parameters": [
+                "downArrowImg"
+            ],
+            "items": [
+                {
+                    "when": "${@viewportProfile == @hubLandscapeSmall}",
+                    "type": "Image",
+                    "opacity": 0.7,
+                    "width": "5vw",
+                    "height": "5vh",
+                    "top": "95vh",
+                    "left": "86vw",
+                    "source": "${downArrowImg}",
+                    "scale": "best-fit",
+                    "align": "center",
+                    "position": "absolute"
+                }
+            ]
+        },
+        "mainLayout": {
+            "parameters": [
+                "pBackgroundImage",
+                "pBackgroundImageRound",
+                "pTransparentBg",
+                "pLogoImage",
+                "pTitleText",
+                "pSubTitleText",
+                "pWatchNowBtn",
+                "list",
+                "downArrow",
+                "pSmallRoundMenuOption"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "height": "100vh",
+                    "width": "100vw",
+                    "items": [
+                        {
+                            "description": "Background with left gradient",
+                            "type": "backgroundLeftLayout",
+                            "bgImg": "${pBackgroundImage}",
+                            "bgImgRound": "${pBackgroundImageRound}"
+                        },
+                        {
+                            "description": "Background with bottom gradient",
+                            "type": "backgrounBtmLayout",
+                            "bgImgTransparent": "${pTransparentBg}"
+                        },
+                        {
+                            "description": "Logo",
+                            "type": "logoLayout",
+                            "logoUrl": "${pLogoImage}"
+                        },
+                        {
+                            "description": "Title text",
+                            "type": "titleTextLayout",
+                            "titleText": "${pTitleText}"
+                        },
+                        {
+                            "description": "Subtitle multi line text",
+                            "type": "subTitleTextLayout",
+                            "subTitleText": "${pSubTitleText}"
+                        },
+                        {
+                            "description": "CTA Watch Now button",
+                            "type": "watchNowBtnLayout",
+                            "pBtnText": "▶   WATCH NOW  "
+                        },
+                        {
+                            "description": "Cards layout",
+                            "type": "videoCardsLayout",
+                            "list": "${list}"
+                        },
+                        {
+                            "description": "Circlular cards layout",
+                            "type": "cardCircleLayout",
+                            "paddingTop": 2,
+                            "paddingLeft": 2,
+                            "paddingRight": 2,
+                            "outerColour": "blue",
+                            "innerColour": "white",
+                            "size": "10",
+                            "list": "${list}",
+                            "smallRoundMenuOption": "${pSmallRoundMenuOption}"
+                        },
+                        {
+                            "description": "Down arrow under the circluar cards",
+                            "type": "downArrowLayout",
+                            "downArrowImg": "${downArrow}"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
             {
-                "picture": {
-                    "type": "uri",
-                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162732/APL/video_cards/60360150_10155935158957504_6009695742971609088_o.jpg"
-                },
-                "humanLabel": {
-                    "xml:lang": "en",
-                    "type": "literal",
-                    "value": "Posture"
-                },
-                "imageShowProgressBar": true,
-                "imageProgressBarPercentage": 50
-                
-            },
-            {
-                "picture": {
-                    "type": "uri",
-                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162732/APL/video_cards/60101225_10155935158992504_7912407113123495936_o.jpg"
-                },
-                "humanLabel": {
-                    "xml:lang": "en",
-                    "type": "literal",
-                    "value": "Stretches"
-                },
-                "imageShowProgressBar": true,
-                "imageProgressBarPercentage": 90
-            },
-            {
-                "picture": {
-                    "type": "uri",
-                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162732/APL/video_cards/60546674_10155935159027504_4623598853252186112_o.jpg"
-                },
-                "humanLabel": {
-                    "xml:lang": "en",
-                    "type": "literal",
-                    "value": "Grounding"
-                },
-                "imageShowProgressBar": true,
-                "imageProgressBarPercentage": 30
-                
-            },
-            {
-                "picture": {
-                    "type": "uri",
-                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162733/APL/video_cards/89666966_10156637094182504_4603664784750018560_n.jpg"
-                },
-                "humanLabel": {
-                    "xml:lang": "en",
-                    "type": "literal",
-                    "value": "Relax"
-                },
-                "imageShowProgressBar": true,
-                "imageProgressBarPercentage": 30
-            },
-            {
-                "picture": {
-                    "type": "uri",
-                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162732/APL/video_cards/53709496_10155793199212504_9169545866023796736_o.jpg"
-                },
-                "humanLabel": {
-                    "xml:lang": "en",
-                    "type": "literal",
-                    "value": "Balance"
-                },
-                "imageShowProgressBar": true,
-                "imageProgressBarPercentage": 30
-            },
-            {
-                "picture": {
-                    "type": "uri",
-                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162734/APL/video_cards/69684302_10156165342662504_7473608648296497152_o.jpg"
-                },
-                "humanLabel": {
-                    "xml:lang": "en",
-                    "type": "literal",
-                    "value": "Calm"
-                },
-                "imageShowProgressBar": true,
-                "imageProgressBarPercentage": 30
-            },
-            {
-                "picture": {
-                    "type": "uri",
-                    "value": "https://res.cloudinary.com/snapitdirect/image/upload/v1586162734/APL/video_cards/69684302_10156165342662504_7473608648296497152_o.jpg"
-                },
-                "humanLabel": {
-                    "xml:lang": "en",
-                    "type": "literal",
-                    "value": "Calm"
-                },
-                "imageShowProgressBar": true,
-                "imageProgressBarPercentage": 30
+                "type": "mainLayout",
+                "pBackgroundImage": "${payload.currentView.properties.backgroundImage}",
+                "pBackgroundImageRound": "${payload.currentView.properties.backgroundImageSmall}",
+                "pTransparentBg": "${payload.currentView.properties.transparentBg}",
+                "pLogoImage": "${payload.currentView.properties.logoImage}",
+                "pTitleText": "${payload.currentView.properties.titleText}",
+                "pSubTitleText": "${payload.currentView.properties.subTitleText}",
+                "pWatchNowBtn": "${payload.currentView.properties.watchNowBtn}",
+                "list": "${payload.currentView.videoCards}",
+                "downArrow": "${payload.currentView.properties.downArrow}",
+                "pSmallRoundMenuOption": "${payload.currentView.properties.smallRoundMenuOption}"
             }
         ]
     }
